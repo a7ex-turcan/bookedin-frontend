@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserProfileComponent} from '../user-profile/user-profile.component';
+import {SideMenuComponent} from '../side-menu/side-menu.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
   imports: [
-    UserProfileComponent
+    SideMenuComponent
   ],
   styleUrls: ['./root.component.sass']
 })

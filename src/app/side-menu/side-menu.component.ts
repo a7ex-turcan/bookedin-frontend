@@ -3,15 +3,15 @@ import {AvatarComponent} from '../../shared/avatar/avatar.component';
 import {NgIf, NgStyle} from '@angular/common';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
+  selector: 'app-side-menu',
+  templateUrl: './side-menu.component.html',
   imports: [
     AvatarComponent,
     NgStyle,
     NgIf
   ],
-  styleUrls: ['./user-profile.component.sass']
+  styleUrls: ['./side-menu.component.sass']
 })
-export class UserProfileComponent {
+export class SideMenuComponent {
   @Input() backgroundImageUrl: string | null = null;
 }
