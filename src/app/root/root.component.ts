@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {SideMenuComponent} from '../side-menu/side-menu.component';
+import {TopMenuComponent} from '../top-menu/top-menu.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './root.component.html',
   imports: [
-    SideMenuComponent
+    SideMenuComponent,
+    TopMenuComponent
   ],
   styleUrls: ['./root.component.sass']
 })
