@@ -1,8 +1,9 @@
-<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
-  <div class="bg-gray-800 p-4 flex justify-center">
-    <app-avatar name="User Name"></app-avatar>
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden relative">
+  <div *ngIf="backgroundImageUrl" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}" class="absolute inset-0 w-full h-32 bg-cover bg-center z-0"></div>
+  <div class="relative z-10 flex justify-center pt-4">
+    <app-avatar name="Alex Turcan"></app-avatar>
   </div>
-  <div class="p-4">
+  <div class="p-4 relative z-10">
     <ul class="list-none">
       <li class="py-2 border-b border-gray-200">
         <a href="#" class="text-gray-800 hover:text-gray-600">Feed</a>
