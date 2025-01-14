@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {NgIf, NgStyle} from '@angular/common';
+import {NgClass, NgIf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-avatar',
   imports: [
     NgIf,
-    NgStyle
+    NgStyle,
+    NgClass
   ],
   templateUrl: './avatar.component.html',
   styleUrl: './avatar.component.sass'
@@ -13,12 +14,15 @@ import {NgIf, NgStyle} from '@angular/common';
 export class AvatarComponent implements OnInit {
   @Input() name: string = '';
   @Input() imageUrl: string | null = null;
+  @Input() backgroundColor: string = '';
+  @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
   initials: string = '';
-  backgroundColor: string = '';
 
   ngOnInit(): void {
     this.initials = this.getInitials(this.name);
-    this.backgroundColor = this.getBackgroundColor(this.initials);
+    if (!this.backgroundColor) {
+      this.backgroundColor = this.getBackgroundColor(this.initials);
+    }
   }
 
   getInitials(name: string): string {
@@ -32,5 +36,16 @@ export class AvatarComponent implements OnInit {
     ];
     const charCodeSum = initials.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
     return colors[charCodeSum % colors.length];
+  }
+
+  get positionClasses() {
+    return {
+      'flex-col': this.position === 'bottom' || this.position === 'top',
+      'flex-row': this.position === 'left' || this.position === 'right',
+      'items-start': this.position === 'top',
+      'items-end': this.position === 'bottom',
+      'justify-start': this.position === 'left',
+      'justify-end': this.position === 'right'
+    };
   }
 }
