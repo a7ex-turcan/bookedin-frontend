@@ -16,6 +16,7 @@ export class AvatarComponent implements OnInit {
   @Input() imageUrl: string | null = null;
   @Input() backgroundColor: string = '';
   @Input() position: 'top' | 'bottom' | 'left' | 'right' = 'bottom';
+  @Input() size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'l';
   initials: string = '';
 
   ngOnInit(): void {
@@ -46,6 +47,16 @@ export class AvatarComponent implements OnInit {
       'items-end': this.position === 'bottom',
       'justify-start': this.position === 'left',
       'justify-end': this.position === 'right'
+    };
+  }
+
+  get sizeClasses() {
+    return {
+      'w-8 h-8': this.size === 'xs',
+      'w-12 h-12': this.size === 's',
+      'w-16 h-16': this.size === 'm',
+      'w-20 h-20': this.size === 'l',
+      'w-24 h-24': this.size === 'xl'
     };
   }
 }
