@@ -1,6 +1,6 @@
 <!-- src/app/search-bar/search-bar.component.html -->
 <div class="relative">
-  <input type="text" placeholder="Search..." class="w-full p-2 rounded-md pr-10" (input)="onSearch($event)"
+  <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearch($event)" placeholder="Search..." class="w-full p-2 rounded-md pr-10"
          #searchInput/>
   <div class="absolute right-2 top-1/2 transform -translate-y-1/2 ">
     <button *ngIf="searchInput.value" (click)="clearSearch(searchInput)"
