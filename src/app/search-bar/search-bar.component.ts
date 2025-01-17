@@ -60,7 +60,7 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   private mapBookToSearchResult(book: Book): SearchResult {
     return {
-      imageUrl: "book-placeholder.png",
+      imageUrl: "api/books/cover/"+book.coverId+"?size=s",
       title: book.title,
       subTitle: book.author
     };
