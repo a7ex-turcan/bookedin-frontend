@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Book} from '../books/book.model';
-
+// src/core/services/book.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Book } from '../books/book.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,13 @@ import {Book} from '../books/book.model';
 export class BookService {
   private apiUrl = 'api/books/search';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
-  search(query: string): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}?query=${query}`);
+  search(query: string, limit?: number): Observable<Book[]> {
+    let params = new HttpParams().set('query', query);
+    if (limit) {
+      params = params.set('limit', limit.toString());
+    }
+    return this.http.get<Book[]>(this.apiUrl, { params });
   }
 }

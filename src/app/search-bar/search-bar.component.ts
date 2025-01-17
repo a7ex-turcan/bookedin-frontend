@@ -35,7 +35,7 @@ export class SearchBarComponent {
     clearTimeout(this.debounceTimeout);
 
     this.debounceTimeout = setTimeout(() => {
-      this.bookService.search(query).subscribe((books: Book[]) => {
+      this.bookService.search(query, 7).subscribe((books: Book[]) => {
         this.items = books.map(book => ({
           imageUrl: 'book-placeholder.png',
           title: book.title,
