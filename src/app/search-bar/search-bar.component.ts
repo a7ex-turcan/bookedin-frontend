@@ -4,7 +4,7 @@ import { SearchResultComponent } from '../../shared/search-result/search-result.
 import { NgForOf, NgIf } from '@angular/common';
 import { BookService } from '../../core/services/book.service';
 import { Book } from '../../core/books/book.model';
-import { Subject } from 'rxjs';
+import {Subject, tap} from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { FormsModule } from '@angular/forms';
 
@@ -35,10 +35,11 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.searchSubject.pipe(
+      tap(_=>{  this.loading = true;}),
       debounceTime(300), // wait for 300ms pause in events
       distinctUntilChanged(), // only emit if value is different from previous value
       switchMap(query => {
-        this.loading = true;
+
         return this.bookService.search(query);
       }) // switch to new search observable
     ).subscribe(books => {

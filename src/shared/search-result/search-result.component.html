@@ -1,8 +1,15 @@
+<!-- src/shared/search-result/search-result.component.html -->
 <div class="flex items-center p-2">
   <ngx-skeleton-loader *ngIf="!imageLoaded" class="h-12 w-12 rounded-md mr-4" count="1" appearance="line" [theme]="{ width: '48px', height: '48px' }"></ngx-skeleton-loader>
   <img [src]="result.imageUrl" alt="Image" class="h-12 w-12 rounded-md mr-4" [class.hidden]="!imageLoaded" (load)="onImageLoad()">
   <div>
-    <div class="font-bold">{{ result.title }}</div>
-    <div class="text-gray-600">{{ result.subTitle }}</div>
+    <div *ngIf="isLoading; else titleContent" class="w-32 h-4 bg-gray-300 rounded"></div>
+    <ng-template #titleContent>
+      <div class="font-bold">{{ result.title }}</div>
+    </ng-template>
+    <div *ngIf="isLoading; else subTitleContent" class="w-24 h-3 bg-gray-300 rounded mt-1"></div>
+    <ng-template #subTitleContent>
+      <div class="text-gray-600">{{ result.subTitle }}</div>
+    </ng-template>
   </div>
 </div>

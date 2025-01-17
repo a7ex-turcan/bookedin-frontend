@@ -1,8 +1,8 @@
 // src/shared/search-result/search-result.component.ts
 import { Component, Input } from '@angular/core';
 import { SearchResult } from './search-result';
-import {NgIf} from '@angular/common';
-import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
+import { NgIf } from '@angular/common';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @Component({
   selector: 'app-search-result',
@@ -15,6 +15,7 @@ import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 })
 export class SearchResultComponent {
   @Input() result!: SearchResult;
+  @Input() isLoading = false;
   imageLoaded = false;
 
   onImageLoad() {

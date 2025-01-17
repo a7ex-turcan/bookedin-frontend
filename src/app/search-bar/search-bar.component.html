@@ -1,3 +1,4 @@
+<!-- src/app/search-bar/search-bar.component.html -->
 <div class="relative">
   <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="onSearch($event)" placeholder="Search..." class="w-full p-2 rounded-md pr-10" #searchInput/>
   <div class="absolute right-2 top-1/2 transform -translate-y-1/2 ">
@@ -8,7 +9,7 @@
   <div *ngIf="showResults" class="absolute left-0 right-0 bg-white border border-gray-300 mt-2 rounded-md shadow-lg">
     <ul class="max-h-80 overflow-y-auto">
       <li *ngFor="let item of items" class="p-2 border-b border-gray-200 cursor-pointer last:border-0 hover:bg-gray-100">
-        <app-search-result [result]="item"></app-search-result>
+        <app-search-result [result]="item" [isLoading]="loading"></app-search-result>
       </li>
     </ul>
     <div class="p-2 text-center text-blue-500 cursor-pointer hover:underline">All Results...</div>
