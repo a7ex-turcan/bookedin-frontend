@@ -1,3 +1,4 @@
+// src/app/search-bar/search-bar.component.ts
 import { Component, HostListener, ElementRef } from '@angular/core';
 import { SearchResult } from '../../shared/search-result/search-result';
 import { SearchResultComponent } from '../../shared/search-result/search-result.component';
@@ -35,6 +36,12 @@ export class SearchBarComponent {
       this.items = this.getDummyItems(query);
       this.showResults = this.items.length > 0;
     }, 300); // 300ms debounce time
+  }
+
+  clearSearch(input: HTMLInputElement) {
+    input.value = '';
+    this.showResults = false;
+    this.items = [];
   }
 
   private getDummyItems(query: string): SearchResult[] {
