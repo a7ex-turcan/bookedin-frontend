@@ -1,9 +1,10 @@
+<!-- src/app/root/root.component.html -->
 <div class="w-full bg-gray-800 p-4 flex items-center fixed top-0 left-0 z-10">
   <div class="absolute left-0 flex items-center p-4">
     <img src="/logo.png" alt="Logo" class="h-12">
   </div>
   <div class="mx-auto w-1/2">
-    <input type="text" placeholder="Search..." class="w-full p-2 rounded-md" />
+    <app-search-bar></app-search-bar>
   </div>
   <div class="absolute right-0 flex items-center pr-6 p-4">
     <a href="#" class="text-white" (click)="signOut()">Sign Out</a>
