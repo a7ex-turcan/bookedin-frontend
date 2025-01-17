@@ -1,17 +1,21 @@
 import { Component } from '@angular/core';
+import {SearchResult} from '../../shared/search-result/search-result';
+import {SearchResultComponent} from '../../shared/search-result/search-result.component';
 import {NgForOf, NgIf} from '@angular/common';
+
 
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
   imports: [
-    NgIf,
-    NgForOf
+    SearchResultComponent,
+    NgForOf,
+    NgIf
   ],
   styleUrls: ['./search-bar.component.sass']
 })
 export class SearchBarComponent {
-  items: string[] = [];
+  items: SearchResult[] = [];
   showResults = false;
   private debounceTimeout: any;
 
@@ -25,10 +29,16 @@ export class SearchBarComponent {
     }, 300); // 300ms debounce time
   }
 
-  private getDummyItems(query: string): string[] {
+  private getDummyItems(query: string): SearchResult[] {
     if (!query) {
       return [];
     }
-    return ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+    return [
+      { imageUrl: 'book-placeholder.png', title: 'Item 1', subTitle: 'Subtitle 1' },
+      { imageUrl: 'book-placeholder.png', title: 'Item 2', subTitle: 'Subtitle 2' },
+      { imageUrl: 'book-placeholder.png', title: 'Item 3', subTitle: 'Subtitle 3' },
+      { imageUrl: 'book-placeholder.png', title: 'Item 4', subTitle: 'Subtitle 4' },
+      { imageUrl: 'book-placeholder.png', title: 'Item 5', subTitle: 'Subtitle 5' }
+    ];
   }
 }
