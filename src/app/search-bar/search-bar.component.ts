@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import {SearchResult} from '../../shared/search-result/search-result';
-import {SearchResultComponent} from '../../shared/search-result/search-result.component';
-import {NgForOf, NgIf} from '@angular/common';
-
+import { Component, HostListener, ElementRef } from '@angular/core';
+import { SearchResult } from '../../shared/search-result/search-result';
+import { SearchResultComponent } from '../../shared/search-result/search-result.component';
+import { NgForOf, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-search-bar',
@@ -18,6 +17,15 @@ export class SearchBarComponent {
   items: SearchResult[] = [];
   showResults = false;
   private debounceTimeout: any;
+
+  constructor(private eRef: ElementRef) {}
+
+  @HostListener('document:click', ['$event'])
+  clickout(event: Event) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.showResults = false;
+    }
+  }
 
   onSearch(event: Event) {
     const query = (event.target as HTMLInputElement).value;
