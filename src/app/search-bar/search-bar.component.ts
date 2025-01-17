@@ -46,7 +46,7 @@ export class SearchBarComponent implements OnInit, OnChanges {
   }
 
   @HostListener('document:click', ['$event'])
-  clickout(event: Event) {
+  clickOut(event: Event) {
     if (!this.eRef.nativeElement.contains(event.target)) {
       this.showResults = false;
     }
