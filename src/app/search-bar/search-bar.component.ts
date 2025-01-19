@@ -1,12 +1,13 @@
-import { Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { SearchResult } from '../../shared/search-result/search-result';
-import { SearchResultComponent } from '../../shared/search-result/search-result.component';
-import { NgForOf, NgIf } from '@angular/common';
-import { BookService } from '../../core/services/book.service';
-import { Book } from '../../core/books/book.model';
+// src/app/search-bar/search-bar.component.ts
+import {Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {SearchResult} from '../../shared/search-result/search-result';
+import {SearchResultComponent} from '../../shared/search-result/search-result.component';
+import {NgForOf, NgIf} from '@angular/common';
+import {BookService} from '../../core/services/book.service';
+import {Book} from '../../core/books/book.model';
 import {Subject, tap} from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { FormsModule } from '@angular/forms';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -27,7 +28,8 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   public searchQuery?: string;
 
-  constructor(private eRef: ElementRef, private bookService: BookService) {}
+  constructor(private eRef: ElementRef, private bookService: BookService) {
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
@@ -35,11 +37,17 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.searchSubject.pipe(
-      tap(_=>{  this.loading = true;}),
+      tap(_ => {
+        this.loading = true;
+      }),
       debounceTime(300), // wait for 300ms pause in events
       distinctUntilChanged(), // only emit if value is different from previous value
       switchMap(query => {
-
+        if (!query) {
+          this.loading = false;
+          this.showResults = false;
+          return [];
+        }
         return this.bookService.search(query);
       }) // switch to new search observable
     ).subscribe(books => {
@@ -70,10 +78,15 @@ export class SearchBarComponent implements OnInit, OnChanges {
     };
   }
 
-  onSearch($event: any) {
+  onSearch(searchTerm: string) {
+    if (!searchTerm) {
+      this.showResults = false;
+      this.items = [];
+      return;
+    }
     this.showResults = true;
     this.items = this.generateDummyItems();
-    this.searchSubject.next($event);
+    this.searchSubject.next(searchTerm);
   }
 
   private generateDummyItems(): SearchResult[] {
