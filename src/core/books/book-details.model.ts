@@ -1,5 +1,7 @@
+import { Author } from './author.model';
+
 export interface BookDetails {
-  authors: string[];
+  authors: Author[];
   title: string;
   coverId: number;
   workId: string;

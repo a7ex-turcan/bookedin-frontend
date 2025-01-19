@@ -1,4 +1,5 @@
 // src/core/books/book.model.ts
+
 export interface Book {
   authors: string[];
   title: string;

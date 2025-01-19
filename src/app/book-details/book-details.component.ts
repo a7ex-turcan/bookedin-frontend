@@ -1,3 +1,4 @@
+// src/app/book-details/book-details.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookDetails } from '../../core/books/book-details.model';
@@ -10,6 +11,7 @@ import { BookService } from '../../core/services/book.service';
 })
 export class BookDetailsComponent implements OnInit {
   book: BookDetails | null = null;
+  authorsList: string = '';
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
@@ -20,6 +22,7 @@ export class BookDetailsComponent implements OnInit {
         this.bookService.getBookDetails(workId).subscribe(
           (bookDetails) => {
             this.book = bookDetails;
+            this.authorsList = (bookDetails.authors ?? []).map(author => author.name).join(', ');
           },
           (error) => {
             console.error('Error fetching book details:', error);
