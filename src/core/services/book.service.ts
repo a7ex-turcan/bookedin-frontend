@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Book } from '../books/book.model';
+import {BookDetails} from '../books/book-details.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl = 'api/books/search';
+  private apiUrl = 'api/books';
 
   constructor(private http: HttpClient) {}
 
@@ -17,6 +18,10 @@ export class BookService {
     if (limit) {
       params = params.set('limit', limit.toString());
     }
-    return this.http.get<Book[]>(this.apiUrl, { params });
+    return this.http.get<Book[]>(this.apiUrl+'/search', { params });
+  }
+
+  getBookDetails(id: string): Observable<BookDetails> {
+    return this.http.get<BookDetails>(`${this.apiUrl}/${id}`);
   }
 }

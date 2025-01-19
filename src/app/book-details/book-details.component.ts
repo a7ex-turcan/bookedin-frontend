@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BookDetails } from '../../core/books/book-details.model';
+import { BookService } from '../../core/services/book.service';
 
 @Component({
   selector: 'app-book-details',
@@ -7,18 +9,23 @@ import { BookDetails } from '../../core/books/book-details.model';
   styleUrls: ['./book-details.component.sass']
 })
 export class BookDetailsComponent implements OnInit {
-  @Input() workId!: string;
   book: BookDetails | null = null;
 
+  constructor(private bookService: BookService, private route: ActivatedRoute) {}
+
   ngOnInit() {
-    // Dummy book data
-    this.book = {
-      authors: ['Author One', 'Author Two'],
-      title: 'Dummy Book Title',
-      coverId: 1,
-      workId: this.workId,
-      description: 'This is a dummy description of the book.',
-      subjects: ['Subject One', 'Subject Two']
-    };
+    this.route.paramMap.subscribe(params => {
+      const workId = params.get('workId');
+      if (workId) {
+        this.bookService.getBookDetails(workId).subscribe(
+          (bookDetails) => {
+            this.book = bookDetails;
+          },
+          (error) => {
+            console.error('Error fetching book details:', error);
+          }
+        );
+      }
+    });
   }
 }

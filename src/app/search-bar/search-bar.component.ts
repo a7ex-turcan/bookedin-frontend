@@ -1,14 +1,14 @@
 // src/app/search-bar/search-bar.component.ts
-import { Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
-import { SearchResult } from '../../shared/search-result/search-result';
-import { SearchResultComponent } from '../../shared/search-result/search-result.component';
-import { NgForOf, NgIf } from '@angular/common';
-import { BookService } from '../../core/services/book.service';
-import { Book } from '../../core/books/book.model';
-import { Subject, tap } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { FormsModule } from '@angular/forms';
+import {Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {Router} from '@angular/router';
+import {SearchResult} from '../../shared/search-result/search-result';
+import {SearchResultComponent} from '../../shared/search-result/search-result.component';
+import {NgForOf, NgIf} from '@angular/common';
+import {BookService} from '../../core/services/book.service';
+import {Book} from '../../core/books/book.model';
+import {Subject, tap} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -101,6 +101,10 @@ export class SearchBarComponent implements OnInit, OnChanges {
   }
 
   onResultClick(workId: string) {
+    if (this.loading) {
+      return; // Prevent clicking if results are loading
+    }
+    this.showResults = false; // Collapse the flyout
     this.router.navigate(['/books', workId]);
   }
 }
