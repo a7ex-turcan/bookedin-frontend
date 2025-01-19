@@ -71,10 +71,11 @@ export class SearchBarComponent implements OnInit, OnChanges {
   }
 
   private mapBookToSearchResult(book: Book): SearchResult {
+    const distinctAuthors = Array.from(new Set(book.authors));
     return {
       imageUrl: "api/books/cover/" + book.coverId + "?size=s",
       title: book.title,
-      subTitle: book.author
+      subTitle: distinctAuthors.join(', ')
     };
   }
 
