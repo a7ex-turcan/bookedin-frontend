@@ -1,11 +1,11 @@
 // src/app/book-details/book-details.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import {Observable, of, tap} from 'rxjs';
+import {switchMap, map, catchError, distinctUntilChanged} from 'rxjs/operators';
 import { BookDetails } from '../../core/books/book-details.model';
 import { BookService } from '../../core/services/book.service';
-import {AsyncPipe, NgIf} from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
@@ -19,17 +19,26 @@ import {AsyncPipe, NgIf} from '@angular/common';
 export class BookDetailsComponent implements OnInit {
   book$: Observable<BookDetails | null> | null = null;
   authorsList$: Observable<string> | null = null;
+  isLoading = true;
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.book$ = this.route.paramMap.pipe(
+      distinctUntilChanged(),
+      tap(_ => this.isLoading = true),
       switchMap(params => {
         const workId = params.get('workId');
         if (workId) {
-          return this.bookService.getBookDetails(workId);
+          return this.bookService.getBookDetails(workId).pipe(
+            catchError(() => of(null))
+          );
         }
-        return [null];
+        return of(null);
+      }),
+      map(bookDetails => {
+        this.isLoading = false;
+        return bookDetails;
       })
     );
 
