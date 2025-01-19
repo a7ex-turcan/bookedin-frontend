@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import { SideMenuComponent } from '../side-menu/side-menu.component';
 import { TopMenuComponent } from '../top-menu/top-menu.component';
 import { SearchBarComponent } from '../search-bar/search-bar.component';
@@ -10,7 +10,8 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
   imports: [
     SideMenuComponent,
     TopMenuComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    RouterOutlet
   ],
   styleUrls: ['./root.component.sass']
 })

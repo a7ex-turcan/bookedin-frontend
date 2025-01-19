@@ -1,13 +1,14 @@
 // src/app/search-bar/search-bar.component.ts
-import {Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
-import {SearchResult} from '../../shared/search-result/search-result';
-import {SearchResultComponent} from '../../shared/search-result/search-result.component';
-import {NgForOf, NgIf} from '@angular/common';
-import {BookService} from '../../core/services/book.service';
-import {Book} from '../../core/books/book.model';
-import {Subject, tap} from 'rxjs';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
-import {FormsModule} from '@angular/forms';
+import { Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { SearchResult } from '../../shared/search-result/search-result';
+import { SearchResultComponent } from '../../shared/search-result/search-result.component';
+import { NgForOf, NgIf } from '@angular/common';
+import { BookService } from '../../core/services/book.service';
+import { Book } from '../../core/books/book.model';
+import { Subject, tap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
@@ -28,7 +29,7 @@ export class SearchBarComponent implements OnInit, OnChanges {
 
   public searchQuery?: string;
 
-  constructor(private eRef: ElementRef, private bookService: BookService) {
+  constructor(private eRef: ElementRef, private bookService: BookService, private router: Router) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,7 +76,8 @@ export class SearchBarComponent implements OnInit, OnChanges {
     return {
       imageUrl: "api/books/cover/" + book.coverId + "?size=s",
       title: book.title,
-      subTitle: distinctAuthors.join(', ')
+      subTitle: distinctAuthors.join(', '),
+      objectID: book.workId
     };
   }
 
@@ -96,5 +98,9 @@ export class SearchBarComponent implements OnInit, OnChanges {
       title: 'Loading...',
       subTitle: ''
     });
+  }
+
+  onResultClick(workId: string) {
+    this.router.navigate(['/books', workId]);
   }
 }

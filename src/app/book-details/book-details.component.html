@@ -1,4 +1,5 @@
-<div class="p-4 bg-white rounded shadow-md">
+<!-- src/app/book-details/book-details.component.html -->
+<div class="p-4 bg-white rounded shadow-md w-full">
   <div class="text-2xl font-bold mb-4">{{ book?.title }}</div>
   <div class="flex">
     <div class="w-1/3">
@@ -6,13 +7,13 @@
     </div>
     <div class="w-2/3 pl-4">
       <div class="mb-2">
-        <span class="font-semibold">Authors:</span> {{ book?.authors.join(', ') }}
+        <span class="font-semibold">Authors:</span> {{ (book?.authors??[]) .join(', ') }}
       </div>
       <div class="mb-2">
         <span class="font-semibold">Description:</span> {{ book?.description }}
       </div>
       <div class="mb-2">
-        <span class="font-semibold">Subjects:</span> {{ book?.subjects.join(', ') }}
+        <span class="font-semibold">Subjects:</span> {{ (book?.subjects ?? []).join(', ') }}
       </div>
     </div>
   </div>
