@@ -6,9 +6,13 @@
 
       <div class="text-2xl font-semibold mb-4">{{ book.title }}</div>
       <div class="flex">
-        <div class="w-1/3">
+        <div class="w-1/3 relative">
+          <div class="absolute inset-0 flex justify-center" [class.hidden]="imageLoaded">
+            <div class="h-96 w-full bg-gray-300 rounded-md animate-pulse"></div>
+          </div>
           <img [src]="'api/books/cover/' + book.coverId + '?size=m'" alt="Book Cover"
-               class="w-full max-w-xs max-h-96 aspect-[1/1.5] rounded-md">
+               class="w-full max-w-xs max-h-96 aspect-[1/1.5] rounded-md"
+               (load)="imageLoaded = true">
         </div>
         <div class="w-2/3 pl-4">
           <div class="mb-2">

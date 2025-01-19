@@ -20,6 +20,7 @@ export class BookDetailsComponent implements OnInit {
   book$: Observable<BookDetails | null> | null = null;
   authorsList$: Observable<string> | null = null;
   isLoading = true;
+  imageLoaded = false; // Add this property
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
