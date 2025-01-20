@@ -1,5 +1,5 @@
 <!-- src/app/book-details/book-details.component.html -->
-<div class="p-4 bg-white rounded shadow-md w-full">
+<div class="p-4 bg-white rounded-lg shadow-md w-full">
   <div *ngIf="book$ | async as book; else loading">
 
     <ng-container *ngIf="!isLoading; else loading">
@@ -10,7 +10,7 @@
           <div class="absolute inset-0 flex justify-center" [class.hidden]="imageLoaded">
             <div class="h-96 w-full bg-gray-300 rounded-md animate-pulse"></div>
           </div>
-          <img [src]="'api/books/cover/' + book.coverId + '?size=m'" alt="Book Cover"
+          <img [src]="'api/books/cover/' + book.coverId + '?size=l'"
                class="w-full max-w-xs max-h-96 aspect-[1/1.5] rounded-md"
                (load)="imageLoaded = true">
         </div>
