@@ -5,6 +5,7 @@ import { Observable, of, tap } from 'rxjs';
 import { switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
 import { BookDetails } from '../../core/books/book-details.model';
 import { BookService } from '../../core/services/book.service';
+import { FavoritesService } from '../../core/services/favorites.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
@@ -23,7 +24,11 @@ export class BookDetailsComponent implements OnInit {
   imageLoaded = false;
   isFavorite = false; // Add this property
 
-  constructor(private bookService: BookService, private route: ActivatedRoute) {}
+  constructor(
+    private bookService: BookService,
+    private route: ActivatedRoute,
+    private favoritesService: FavoritesService // Inject FavoritesService
+  ) {}
 
   ngOnInit() {
     this.book$ = this.route.paramMap.pipe(
@@ -49,7 +54,9 @@ export class BookDetailsComponent implements OnInit {
     );
   }
 
-  toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
+  toggleFavorite(bookDetails: BookDetails) {
+    this.favoritesService.addFavourite(bookDetails.workId).subscribe(() => {
+      this.isFavorite = !this.isFavorite;
+    });
   }
 }
