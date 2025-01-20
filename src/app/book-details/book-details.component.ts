@@ -1,8 +1,8 @@
 // src/app/book-details/book-details.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {Observable, of, tap} from 'rxjs';
-import {switchMap, map, catchError, distinctUntilChanged} from 'rxjs/operators';
+import { Observable, of, tap } from 'rxjs';
+import { switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
 import { BookDetails } from '../../core/books/book-details.model';
 import { BookService } from '../../core/services/book.service';
 import { AsyncPipe, NgIf } from '@angular/common';
@@ -20,7 +20,8 @@ export class BookDetailsComponent implements OnInit {
   book$: Observable<BookDetails | null> | null = null;
   authorsList$: Observable<string> | null = null;
   isLoading = true;
-  imageLoaded = false; // Add this property
+  imageLoaded = false;
+  isFavorite = false; // Add this property
 
   constructor(private bookService: BookService, private route: ActivatedRoute) {}
 
@@ -46,5 +47,9 @@ export class BookDetailsComponent implements OnInit {
     this.authorsList$ = this.book$.pipe(
       map(bookDetails => (bookDetails?.authors ?? []).map(author => author.name).join(', '))
     );
+  }
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite;
   }
 }
