@@ -9,6 +9,11 @@
     <div class="text-xl font-semibold">
       <a [routerLink]="['/books', book?.workId]" class="text-gray-800 hover:text-gray-600">{{ book?.title }}</a>
     </div>
-    <div class="text-gray-600">{{ book?.authors ?? [] | authorsList }}</div>
+    <div class="text-gray-600" *ngIf="book">
+      <ng-container *ngFor="let author of book.authors">
+        <a [routerLink]="['/authors', author.key]" class="text-gray-800 hover:text-gray-600">{{ author.name }}</a><span
+        *ngIf="author !== book.authors[book.authors.length - 1]">, </span>
+      </ng-container>
+    </div>
   </div>
 </div>

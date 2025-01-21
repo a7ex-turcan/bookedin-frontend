@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { BookDetails } from '../../core/books/book-details.model';
 import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
-import { NgIf } from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
 import {RouterLink} from '@angular/router';
 
@@ -9,9 +9,9 @@ import {RouterLink} from '@angular/router';
   selector: 'app-book-card',
   templateUrl: './book-card.component.html',
   imports: [
-    AuthorsListPipe,
     NgIf,
-    RouterLink
+    RouterLink,
+    NgForOf
   ],
   styleUrls: ['./book-card.component.sass']
 })
