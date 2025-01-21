@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BookDetails } from '../../core/books/book-details.model';
 
 @Component({
   selector: 'app-book-card',
-  imports: [],
   templateUrl: './book-card.component.html',
-  styleUrl: './book-card.component.sass'
+  styleUrls: ['./book-card.component.sass']
 })
 export class BookCardComponent {
-
+  @Input() book: BookDetails | null = null;
 }
