@@ -45,6 +45,9 @@ export class BookDetailsComponent implements OnInit {
       }),
       map(bookDetails => {
         this.isLoading = false;
+        if (bookDetails) {
+          this.isFavorite = bookDetails.isFavorite; // Set isFavorite based on bookDetails
+        }
         return bookDetails;
       })
     );

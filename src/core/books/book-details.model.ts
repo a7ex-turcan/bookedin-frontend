@@ -7,4 +7,5 @@ export interface BookDetails {
   workId: string;
   description: string;
   subjects: string[];
+  isFavorite: boolean;
 }
