@@ -5,4 +5,5 @@ export interface Book {
   title: string;
   coverId: number;
   workId: string;
+  isFavorite: boolean;
 }

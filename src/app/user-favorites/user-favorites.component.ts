@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BookDetails } from '../../core/books/book-details.model';
-import {BookCardComponent} from '../../shared/book-card/book-card.component';
-import {NgForOf} from '@angular/common';
+import { Book } from '../../core/books/book.model';
+import { BookCardComponent } from '../../shared/book-card/book-card.component';
+import { NgForOf } from '@angular/common';
+import { FavoritesService } from '../../core/services/favorites.service';
 
 @Component({
   selector: 'app-user-favorites',
@@ -13,30 +14,13 @@ import {NgForOf} from '@angular/common';
   styleUrls: ['./user-favorites.component.sass']
 })
 export class UserFavoritesComponent implements OnInit {
-  favoriteBooks: BookDetails[] = [];
+  favoriteBooks: Book[] = [];
+
+  constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
-    // Dummy data for now
-    this.favoriteBooks = [
-      {
-        authors: [{ name: 'Author 1', key: 'OL1A' }],
-        title: 'Book Title 1',
-        coverId: 1,
-        workId: '1',
-        description: 'Description 1',
-        subjects: ['Subject 1'],
-        isFavorite: true
-      },
-      {
-        authors: [{ name: 'Author 2', key: 'OL1A' }],
-        title: 'Book Title 2',
-        coverId: 2,
-        workId: '2',
-        description: 'Description 2',
-        subjects: ['Subject 2'],
-        isFavorite: true
-      },
-      // Add more dummy books as needed
-    ];
+    this.favoritesService.getUserFavorites().subscribe((books: Book[]) => {
+      this.favoriteBooks = books;
+    });
   }
 }

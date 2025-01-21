@@ -11,7 +11,7 @@
     </div>
     <div class="text-gray-600" *ngIf="book">
       <ng-container *ngFor="let author of book.authors">
-        <a [routerLink]="['/authors', author.key]" class="text-gray-800 hover:text-gray-600">{{ author.name }}</a><span
+        <a [routerLink]="['/authors', author]" class="text-gray-800 hover:text-gray-600">{{ author }}</a><span
         *ngIf="author !== book.authors[book.authors.length - 1]">, </span>
       </ng-container>
     </div>
