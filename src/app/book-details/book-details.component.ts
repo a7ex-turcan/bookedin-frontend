@@ -1,12 +1,12 @@
 // src/app/book-details/book-details.component.ts
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Observable, of, tap } from 'rxjs';
-import { switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
-import { BookDetails } from '../../core/books/book-details.model';
-import { BookService } from '../../core/services/book.service';
-import { FavoritesService } from '../../core/services/favorites.service';
-import { AsyncPipe, NgIf } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Observable, of, tap} from 'rxjs';
+import {switchMap, map, catchError, distinctUntilChanged} from 'rxjs/operators';
+import {BookDetails} from '../../core/books/book-details.model';
+import {BookService} from '../../core/services/book.service';
+import {FavoritesService} from '../../core/services/favorites.service';
+import {AsyncPipe, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-book-details',
@@ -28,7 +28,8 @@ export class BookDetailsComponent implements OnInit {
     private bookService: BookService,
     private route: ActivatedRoute,
     private favoritesService: FavoritesService // Inject FavoritesService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.book$ = this.route.paramMap.pipe(
@@ -58,8 +59,14 @@ export class BookDetailsComponent implements OnInit {
   }
 
   toggleFavorite(bookDetails: BookDetails) {
-    this.favoritesService.addFavourite(bookDetails.workId).subscribe(() => {
-      this.isFavorite = !this.isFavorite;
-    });
+    if (this.isFavorite) {
+      this.favoritesService.removeFavourite(bookDetails.workId).subscribe(() => {
+        this.isFavorite = false;
+      });
+    } else {
+      this.favoritesService.addFavourite(bookDetails.workId).subscribe(() => {
+        this.isFavorite = true;
+      });
+    }
   }
 }
