@@ -1,5 +1,5 @@
-<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden" style="display: block;">
-  <div class="relative" style="height: 66.67%;">
+<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+  <div class="relative h-80 w-52">
     <img *ngIf="book" [src]="'api/books/cover/' + book.coverId + '?size=l'" class="w-full h-full object-cover" alt="">
   </div>
   <div class="p-4">
@@ -7,4 +7,3 @@
     <div class="text-gray-600">{{ book?.authors ?? [] | authorsList }}</div>
   </div>
 </div>
-
