@@ -60,10 +60,13 @@ export class BookDetailsComponent implements OnInit {
 
   toggleFavorite(bookDetails: BookDetails) {
     if (this.isFavorite) {
+      this.isFavorite = false;
+
       this.favoritesService.removeFavourite(bookDetails.workId).subscribe(() => {
         this.isFavorite = false;
       });
     } else {
+      this.isFavorite = true;
       this.favoritesService.addFavourite(bookDetails.workId).subscribe(() => {
         this.isFavorite = true;
       });
