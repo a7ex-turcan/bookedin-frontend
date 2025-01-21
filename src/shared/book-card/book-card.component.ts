@@ -3,13 +3,15 @@ import { BookDetails } from '../../core/books/book-details.model';
 import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
 import { NgIf } from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-book-card',
   templateUrl: './book-card.component.html',
   imports: [
     AuthorsListPipe,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrls: ['./book-card.component.sass']
 })

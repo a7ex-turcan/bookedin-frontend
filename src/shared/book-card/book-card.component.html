@@ -6,7 +6,9 @@
     <i class="fas fa-star"></i>
   </button>
   <div class="p-4">
-    <div class="text-xl font-semibold">{{ book?.title }}</div>
+    <div class="text-xl font-semibold">
+      <a [routerLink]="['/books', book?.workId]" class="text-gray-800 hover:text-gray-600">{{ book?.title }}</a>
+    </div>
     <div class="text-gray-600">{{ book?.authors ?? [] | authorsList }}</div>
   </div>
 </div>
