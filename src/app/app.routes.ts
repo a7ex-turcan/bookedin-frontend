@@ -5,6 +5,7 @@ import {authGuard, redirectIfAuthGuard} from './auth.guard';
 import {AppComponent} from './app.component';
 import {RootComponent} from './root/root.component';
 import {BookDetailsComponent} from './book-details/book-details.component';
+import {UserFavoritesComponent} from './user-favorites/user-favorites.component';
 
 export const routes: Routes = [
   {
@@ -14,7 +15,11 @@ export const routes: Routes = [
     children: [
       {
         path: '', component: RootComponent,
-        children: [{path: 'books/:workId', component: BookDetailsComponent}]
+        children: [
+          {path: 'books/:workId', component: BookDetailsComponent},
+          {path: 'favorites', component: UserFavoritesComponent}
+        ],
+
       },
     ]
   },

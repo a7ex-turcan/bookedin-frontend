@@ -1,20 +1,19 @@
 <div class="flex items-center bg-white shadow-lg rounded-lg">
   <div class="mr-4 p-2 relative inset-0 bg-cover bg-center rounded-tl-lg rounded-bl-lg" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}">
-
     <app-avatar name="Alex Turcan" position="right" class="relative z-10" size="s"></app-avatar>
   </div>
   <ul class="flex space-x-4 list-none">
     <li>
-      <a href="#" class="text-gray-800 hover:text-gray-600">Feed</a>
+      <a routerLink="/feed" class="text-gray-800 hover:text-gray-600">Feed</a>
     </li>
     <li>
-      <a href="#" class="text-gray-800 hover:text-gray-600">Reading</a>
+      <a routerLink="/reading" class="text-gray-800 hover:text-gray-600">Reading</a>
     </li>
     <li>
-      <a href="#" class="text-gray-800 hover:text-gray-600">Favorites</a>
+      <a routerLink="/favorites" class="text-gray-800 hover:text-gray-600">Favorites</a>
     </li>
     <li>
-      <a href="#" class="text-gray-800 hover:text-gray-600">Recommendations</a>
+      <a routerLink="/recommendations" class="text-gray-800 hover:text-gray-600">Recommendations</a>
     </li>
   </ul>
 </div>

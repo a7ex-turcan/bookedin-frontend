@@ -7,13 +7,15 @@ import {BookDetails} from '../../core/books/book-details.model';
 import {BookService} from '../../core/services/book.service';
 import {FavoritesService} from '../../core/services/favorites.service';
 import {AsyncPipe, NgIf} from '@angular/common';
+import {AuthorsListPipe} from '../../core/pipes/author-list.pipe';
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
   imports: [
     AsyncPipe,
-    NgIf
+    NgIf,
+    AuthorsListPipe
   ],
   styleUrls: ['./book-details.component.sass']
 })
