@@ -11,4 +11,7 @@ module.exports = {
     },
   },
   plugins: [],
+  corePlugins: {
+    container: true, // Ensures container utilities are included
+  },
 }
