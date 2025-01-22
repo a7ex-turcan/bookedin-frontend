@@ -49,7 +49,7 @@ export class SearchBarComponent implements OnInit, OnChanges {
           this.showResults = false;
           return [];
         }
-        return this.bookService.search(query);
+        return this.bookService.search(query, 10);
       }) // switch to new search observable
     ).subscribe(books => {
       this.items = books.map(book => this.mapBookToSearchResult(book));
