@@ -3,6 +3,7 @@
     <app-book-card
       *ngFor="let book of favoriteBooks"
       [book]="book"
+      (removedFromFavorites)="onRemovedFromFavorites($event)"
     ></app-book-card>
   </div>
 </div>

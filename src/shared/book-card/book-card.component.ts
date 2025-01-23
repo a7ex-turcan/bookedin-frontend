@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { Book } from '../../core/books/book.model';
 import { NgForOf, NgIf } from '@angular/common';
 import { FavoritesService } from '../../core/services/favorites.service';
@@ -17,16 +17,20 @@ import { RouterLink } from '@angular/router';
 export class BookCardComponent {
   @Input() book: Book | null = null;
 
+  @Output() removedFromFavorites = new EventEmitter<Book>();
+
   constructor(private favoritesService: FavoritesService) {}
 
   toggleFavorite(book: Book | null) {
     if (!book) return;
 
     if (book.isFavorite) {
+      this.removedFromFavorites.emit(this.book!);
       this.favoritesService.removeFavourite(book.workId).subscribe(() => {
         if (book) book.isFavorite = false;
       });
     } else {
+
       this.favoritesService.addFavourite(book.workId).subscribe(() => {
         if (book) book.isFavorite = true;
       });

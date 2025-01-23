@@ -23,4 +23,10 @@ export class UserFavoritesComponent implements OnInit {
       this.favoriteBooks = books;
     });
   }
+
+  onRemovedFromFavorites(book: Book) {
+    console.log(book)
+
+    this.favoriteBooks = this.favoriteBooks.filter(b => b.workId !== book.workId);
+  }
 }
