@@ -1,11 +1,11 @@
 // src/app/search-bar/search-bar.component.ts
 import {Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
-import {SearchResult} from '../../shared/search-result/search-result';
-import {SearchResultComponent} from '../../shared/search-result/search-result.component';
+import {SearchResult} from '../../../shared/search-result/search-result';
+import {SearchResultComponent} from '../../../shared/search-result/search-result.component';
 import {NgForOf, NgIf} from '@angular/common';
-import {BookService} from '../../core/services/book.service';
-import {Book} from '../../core/books/book.model';
+import {BookService} from '../../../core/services/book.service';
+import {Book} from '../../../core/books/book.model';
 import {Subject, tap} from 'rxjs';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {FormsModule} from '@angular/forms';
