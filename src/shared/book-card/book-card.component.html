@@ -1,11 +1,11 @@
-<div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-2xl relative">
+<div class="relative max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-2xl group">
   <div class="relative w-full h-80">
     <div class="absolute inset-0 flex justify-center items-center" [class.hidden]="imageLoaded">
       <div class="h-full w-full bg-gray-300 rounded-t-md animate-pulse"></div>
     </div>
     <img *ngIf="book" [src]="'api/books/cover/' + book.coverId + '?size=l'" class="w-full h-full object-cover" alt="" (load)="imageLoaded = true">
   </div>
-  <button (click)="toggleFavorite(book)" [class.text-yellow-500]="book?.isFavorite" class="absolute top-2 right-2 text-gray-400 hover:text-yellow-500">
+  <button (click)="toggleFavorite(book)" [class.text-yellow-500]="book?.isFavorite" class="favorite-button absolute top-2 right-2 text-gray-400 hover:text-yellow-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
     <i class="fas fa-star"></i>
   </button>
   <div class="p-4">
@@ -14,8 +14,7 @@
     </div>
     <div class="text-gray-600" *ngIf="book">
       <ng-container *ngFor="let author of book.authors">
-        <a [routerLink]="['/authors', author]" class="text-gray-800 hover:text-gray-600">{{ author }}</a><span
-        *ngIf="author !== book.authors[book.authors.length - 1]">, </span>
+        <a [routerLink]="['/authors', author]" class="text-gray-800 hover:text-gray-600">{{ author }}</a><span *ngIf="author !== book.authors[book.authors.length - 1]">, </span>
       </ng-container>
     </div>
   </div>
