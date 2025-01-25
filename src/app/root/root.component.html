@@ -1,7 +1,8 @@
-<!-- src/app/root/root.component.html -->
 <div class="w-full bg-gray-800 p-4 flex items-center fixed top-0 left-0 z-50">
   <div class="absolute left-0 flex items-center p-4">
-    <img src="/logo.png" alt="Logo" class="h-12">
+    <a [routerLink]="['/']">
+      <img src="/logo.png" alt="Logo" class="h-12">
+    </a>
   </div>
   <div class="mx-auto w-1/2">
     <app-search-bar></app-search-bar>
