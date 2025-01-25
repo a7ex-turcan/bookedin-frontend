@@ -1,6 +1,6 @@
 // src/app/search-bar/search-bar.component.ts
 import {Component, HostListener, ElementRef, OnInit, OnChanges, SimpleChanges} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {SearchResult} from '../../../shared/search-result/search-result';
 import {SearchResultComponent} from '../../../shared/search-result/search-result.component';
 import {NgForOf, NgIf} from '@angular/common';
@@ -17,7 +17,8 @@ import {FormsModule} from '@angular/forms';
     SearchResultComponent,
     NgForOf,
     NgIf,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   styleUrls: ['./search-bar.component.sass']
 })
