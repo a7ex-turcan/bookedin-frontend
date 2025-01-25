@@ -21,6 +21,7 @@ export class SearchResultsBooksComponent implements OnInit{
   constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
+    setTimeout(()=> {this.isLoading = false}, 500)
   }
 
   onRemovedFromFavorites(book: Book) {
