@@ -106,6 +106,6 @@ export class SearchBarComponent implements OnInit, OnChanges {
       return; // Prevent clicking if results are loading
     }
     this.showResults = false; // Collapse the flyout
-    this.router.navigate(['/books', workId]);
+    void this.router.navigate(['/books', workId]);
   }
 }

@@ -23,7 +23,7 @@ export class LoginComponent {
       .subscribe({
         next: (response) => {
           localStorage.setItem('token', response.token);
-          this.router.navigate(['/']);
+          void this.router.navigate(['/']);
         },
         error: () => {
           this.errorMessage = 'Email or password is incorrect';

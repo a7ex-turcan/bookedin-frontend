@@ -22,6 +22,6 @@ export class RootComponent {
     // Clear user session or token here
     localStorage.removeItem('token');
     // Redirect to login page
-    this.router.navigate(['/login']);
+    void this.router.navigate(['/login']);
   }
 }

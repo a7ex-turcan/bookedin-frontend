@@ -6,7 +6,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const isLoggedIn = !!localStorage.getItem('token'); // Replace with actual authentication check
 
   if (!isLoggedIn) {
-    router.navigate(['/login']);
+    void router.navigate(['/login']);
     return false;
   }
 
@@ -18,7 +18,7 @@ export const redirectIfAuthGuard: CanActivateFn = (route, state) => {
   const isLoggedIn = !!localStorage.getItem('token'); // Replace with actual authentication check
 
   if (isLoggedIn) {
-    router.navigate(['/']);
+    void router.navigate(['/']);
     return false;
   }
 
