@@ -14,11 +14,12 @@ export class LoginComponent {
   public email: string = '';
   public password: string = '';
   public errorMessage: string = '';
-
+  public isLoading: boolean = false;
 
   constructor(private readonly http: HttpClient, private readonly router: Router) { }
 
   onSubmit() {
+    this.isLoading = true;
     this.http.post<{ token: string }>('/api/auth/login', { email: this.email, password: this.password })
       .subscribe({
         next: (response) => {
@@ -27,6 +28,7 @@ export class LoginComponent {
         },
         error: () => {
           this.errorMessage = 'Email or password is incorrect';
+          this.isLoading = false;
         }
       });
   }
