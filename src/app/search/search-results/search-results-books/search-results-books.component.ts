@@ -1,15 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {BookCardComponent} from "../../../../shared/book-card/book-card.component";
-import {NgForOf, NgIf} from "@angular/common";
 import {Book} from '../../../../core/books/book.model';
 import {FavoritesService} from '../../../../core/services/favorites.service';
+import {BookListComponent} from '../../../../shared/book-list/book-list.component';
 
 @Component({
   selector: 'app-search-results-books',
   imports: [
-    BookCardComponent,
-    NgForOf,
-    NgIf
+    BookListComponent
   ],
   templateUrl: './search-results-books.component.html',
   styleUrl: './search-results-books.component.sass'
