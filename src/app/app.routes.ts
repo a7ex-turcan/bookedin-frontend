@@ -1,4 +1,3 @@
-// app.routes.ts
 import {Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {authGuard, redirectIfAuthGuard} from './auth.guard';
@@ -8,6 +7,8 @@ import {BookDetailsComponent} from './book-details/book-details.component';
 import {UserFavoritesComponent} from './user-favorites/user-favorites.component';
 import {SearchResultsComponent} from './search/search-results/search-results.component';
 import {SearchResultsBooksComponent} from './search/search-results/search-results-books/search-results-books.component';
+import {SearchResultsReadersComponent} from './search/search-results/search-results-readers/search-results-readers.component';
+import {SearchResultsAuthorsComponent} from './search/search-results/search-results-authors/search-results-authors.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,9 @@ export const routes: Routes = [
             component: SearchResultsComponent,
             children: [
               {path: '', redirectTo: 'books', pathMatch: 'full'},
-              {path: 'books', component: SearchResultsBooksComponent}
+              {path: 'books', component: SearchResultsBooksComponent},
+              {path: 'readers', component: SearchResultsReadersComponent},
+              {path: 'authors', component: SearchResultsAuthorsComponent}
             ]
           }
         ],
