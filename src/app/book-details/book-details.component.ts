@@ -25,12 +25,13 @@ export class BookDetailsComponent implements OnInit {
   authorsList$: Observable<string> | null = null;
   isLoading = true;
   imageLoaded = false;
-  isFavorite = false; // Add this property
+  isFavorite = false;
+  showAllTags = false; // Add this property
 
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
-    private favoritesService: FavoritesService // Inject FavoritesService
+    private favoritesService: FavoritesService
   ) {
   }
 
@@ -50,7 +51,7 @@ export class BookDetailsComponent implements OnInit {
       map(bookDetails => {
         this.isLoading = false;
         if (bookDetails) {
-          this.isFavorite = bookDetails.isFavorite; // Set isFavorite based on bookDetails
+          this.isFavorite = bookDetails.isFavorite;
         }
         return bookDetails;
       })
@@ -74,5 +75,9 @@ export class BookDetailsComponent implements OnInit {
         this.isFavorite = true;
       });
     }
+  }
+
+  toggleShowAllTags() {
+    this.showAllTags = !this.showAllTags; // Add this method
   }
 }
