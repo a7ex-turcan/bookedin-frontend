@@ -51,7 +51,7 @@ export class BookDetailsComponent implements OnInit {
         this.isLoading = false;
         if (bookDetails) {
           this.isFavorite = bookDetails.isFavorite;
-          this.processedSubjects = this.getSplitSubjects(bookDetails.subjects);
+          this.processedSubjects = this.getUniqueSplitSubjects(bookDetails.subjects);
         }
         return bookDetails;
       })
@@ -80,8 +80,12 @@ export class BookDetailsComponent implements OnInit {
     this.showAllTags = !this.showAllTags;
   }
 
-  getSplitSubjects(subjects: string[]): string[] {
-    return subjects.flatMap(subject => subject.split(',').map(s => s.trim()));
+  getUniqueSplitSubjects(subjects: string[]): string[] {
+    const uniqueSubjects = new Set<string>();
+    subjects.forEach(subject => {
+      subject.split(',').forEach(s => uniqueSubjects.add(s.trim()));
+    });
+    return Array.from(uniqueSubjects);
   }
 
   getDisplayedSubjects(): string[] {
