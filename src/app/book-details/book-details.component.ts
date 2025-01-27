@@ -1,13 +1,12 @@
-// src/app/book-details/book-details.component.ts
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Observable, of, tap} from 'rxjs';
-import {switchMap, map, catchError, distinctUntilChanged} from 'rxjs/operators';
-import {BookDetails} from '../../core/books/book-details.model';
-import {BookService} from '../../core/services/book.service';
-import {FavoritesService} from '../../core/services/favorites.service';
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {AuthorsListPipe} from '../../core/pipes/author-list.pipe';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of, tap } from 'rxjs';
+import { switchMap, map, catchError, distinctUntilChanged } from 'rxjs/operators';
+import { BookDetails } from '../../core/books/book-details.model';
+import { BookService } from '../../core/services/book.service';
+import { FavoritesService } from '../../core/services/favorites.service';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
 
 @Component({
   selector: 'app-book-details',
@@ -26,14 +25,14 @@ export class BookDetailsComponent implements OnInit {
   isLoading = true;
   imageLoaded = false;
   isFavorite = false;
-  showAllTags = false; // Add this property
+  showAllTags = false;
+  processedSubjects: string[] = [];
 
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
     private favoritesService: FavoritesService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.book$ = this.route.paramMap.pipe(
@@ -52,6 +51,7 @@ export class BookDetailsComponent implements OnInit {
         this.isLoading = false;
         if (bookDetails) {
           this.isFavorite = bookDetails.isFavorite;
+          this.processedSubjects = this.getSplitSubjects(bookDetails.subjects);
         }
         return bookDetails;
       })
@@ -65,7 +65,6 @@ export class BookDetailsComponent implements OnInit {
   toggleFavorite(bookDetails: BookDetails) {
     if (this.isFavorite) {
       this.isFavorite = false;
-
       this.favoritesService.removeFavourite(bookDetails.workId).subscribe(() => {
         this.isFavorite = false;
       });
@@ -78,6 +77,14 @@ export class BookDetailsComponent implements OnInit {
   }
 
   toggleShowAllTags() {
-    this.showAllTags = !this.showAllTags; // Add this method
+    this.showAllTags = !this.showAllTags;
+  }
+
+  getSplitSubjects(subjects: string[]): string[] {
+    return subjects.flatMap(subject => subject.split(',').map(s => s.trim()));
+  }
+
+  getDisplayedSubjects(): string[] {
+    return this.showAllTags ? this.processedSubjects : this.processedSubjects.slice(0, 10);
   }
 }
