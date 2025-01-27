@@ -6,7 +6,7 @@ import {switchMap, map, catchError, distinctUntilChanged} from 'rxjs/operators';
 import {BookDetails} from '../../core/books/book-details.model';
 import {BookService} from '../../core/services/book.service';
 import {FavoritesService} from '../../core/services/favorites.service';
-import {AsyncPipe, NgIf} from '@angular/common';
+import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
 import {AuthorsListPipe} from '../../core/pipes/author-list.pipe';
 
 @Component({
@@ -15,7 +15,8 @@ import {AuthorsListPipe} from '../../core/pipes/author-list.pipe';
   imports: [
     AsyncPipe,
     NgIf,
-    AuthorsListPipe
+    AuthorsListPipe,
+    NgForOf
   ],
   styleUrls: ['./book-details.component.sass']
 })
