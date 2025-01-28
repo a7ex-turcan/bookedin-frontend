@@ -2,9 +2,8 @@
   <div class="grid gap-4">
     <app-shelf-card
       *ngFor="let shelf of shelves"
-      [shelfName]="shelf.shelfName"
-      [mainImageUrl]="shelf.mainImageUrl"
-      [additionalImageUrls]="shelf.additionalImageUrls"
+      [title]="shelf.shelfName"
+      [images]="shelf.images"
     ></app-shelf-card>
   </div>
 </div>

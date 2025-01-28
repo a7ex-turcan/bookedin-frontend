@@ -12,7 +12,7 @@ import { NgForOf } from '@angular/common';
   styleUrls: ['./shelf-list.component.sass']
 })
 export class ShelfListComponent implements OnInit {
-  @Input() shelves: { shelfName: string, mainImageUrl: string, additionalImageUrls: string[] }[] = [];
+  @Input() shelves: { shelfName: string, images: string[] }[] = [];
 
   constructor() { }
 
