@@ -9,6 +9,7 @@ import {SearchResultsComponent} from './search/search-results/search-results.com
 import {SearchResultsBooksComponent} from './search/search-results/search-results-books/search-results-books.component';
 import {SearchResultsReadersComponent} from './search/search-results/search-results-readers/search-results-readers.component';
 import {SearchResultsAuthorsComponent} from './search/search-results/search-results-authors/search-results-authors.component';
+import {UserShelvesComponent} from './user-shelves/user-shelves.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
         children: [
           {path: 'books/:workId', component: BookDetailsComponent},
           {path: 'favorites', component: UserFavoritesComponent},
+          {path: 'shelves', component: UserShelvesComponent},
           {
             path: 'search-results',
             component: SearchResultsComponent,
