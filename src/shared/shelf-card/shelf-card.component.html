@@ -1,6 +1,6 @@
-<div class="relative w-full h-64">
+<div class="relative w-full h-64 group">
   <ng-container *ngFor="let imageUrl of images; let i = index">
-    <div class="absolute inset-0 flex items-center justify-center" [ngStyle]="{'top': i * 10 + 'px', 'left': i * 10 + 'px', 'z-index': images.length - i}">
+    <div class="absolute inset-0 flex items-center justify-center transition-all duration-300" [ngStyle]="{'--index': i, 'top': i * 10 + 'px', 'left': i * 10 + 'px', 'z-index': images.length - i}" [class.group-hover:top]="(i * 15) + 'px'" [class.group-hover:left]="(i * 15) + 'px'">
       <div class="relative w-48 h-64 bg-white shadow-lg rounded-lg overflow-hidden">
         <img [src]="imageUrl" alt="Image" class="w-full h-full object-cover">
         <div *ngIf="i === 0" class="absolute bottom-0 w-full bg-white bg-opacity-75 p-4">
