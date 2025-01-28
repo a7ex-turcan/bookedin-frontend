@@ -1,1 +1,19 @@
-<p>shelf-card works!</p>
+<div
+  class="relative max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden transition-shadow duration-300 hover:shadow-2xl group">
+  <div class="relative w-full h-80">
+    <div class="absolute inset-0 flex justify-center items-center" [class.hidden]="imageLoaded">
+      <div class="h-full w-full bg-gray-300 rounded-t-md animate-pulse"></div>
+    </div>
+    <img [src]="mainImageUrl" class="w-full h-full object-cover" alt="" (load)="imageLoaded = true">
+    <div *ngFor="let imageUrl of additionalImageUrls; let i = index"
+         class="absolute top-0 left-0 w-full h-full transform transition-transform duration-300"
+         [ngStyle]="{'z-index': -i, 'transform': 'translate(' + (i * 10) + 'px, ' + (i * 10) + 'px)'}">
+      <img [src]="imageUrl" class="w-full h-full object-cover rounded-t-md opacity-75">
+    </div>
+  </div>
+  <div class="p-4">
+    <div class="text-xl font-semibold text-center">
+      {{ shelfName }}
+    </div>
+  </div>
+</div>

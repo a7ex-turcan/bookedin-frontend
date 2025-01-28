@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import {NgForOf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-shelf-card',
-  imports: [],
   templateUrl: './shelf-card.component.html',
-  styleUrl: './shelf-card.component.sass'
+  imports: [
+    NgForOf,
+    NgStyle
+  ],
+  styleUrls: ['./shelf-card.component.sass']
 })
 export class ShelfCardComponent {
+  @Input() shelfName: string = '';
+  @Input() mainImageUrl: string = '';
+  @Input() additionalImageUrls: string[] = [];
 
+  imageLoaded: boolean = false;
 }
