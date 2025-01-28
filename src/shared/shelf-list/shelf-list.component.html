@@ -1,1 +1,11 @@
 <p>shelf-list works!</p>
+<div class="container mx-auto px-4">
+  <div class="grid gap-4">
+    <app-shelf-card
+      *ngFor="let shelf of shelves"
+      [shelfName]="shelf.shelfName"
+      [mainImageUrl]="shelf.mainImageUrl"
+      [additionalImageUrls]="shelf.additionalImageUrls"
+    ></app-shelf-card>
+  </div>
+</div>

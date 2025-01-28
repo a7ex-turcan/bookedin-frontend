@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ShelfCardComponent } from '../shelf-card/shelf-card.component';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-shelf-list',
-  imports: [],
   templateUrl: './shelf-list.component.html',
-  styleUrl: './shelf-list.component.sass'
+  imports: [
+    ShelfCardComponent,
+    NgForOf
+  ],
+  styleUrls: ['./shelf-list.component.sass']
 })
-export class ShelfListComponent {
+export class ShelfListComponent implements OnInit {
+  @Input() shelves: { shelfName: string, mainImageUrl: string, additionalImageUrls: string[] }[] = [];
 
+  constructor() { }
+
+  ngOnInit(): void { }
 }
