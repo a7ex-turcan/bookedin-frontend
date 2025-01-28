@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ShelfListComponent} from '../../shared/shelf-list/shelf-list.component';
+import { ShelfListComponent } from '../../shared/shelf-list/shelf-list.component';
 
 @Component({
   selector: 'app-user-shelves',
@@ -13,13 +13,18 @@ export class UserShelvesComponent {
   dummyShelves = [
     {
       shelfName: 'My Favorite Books',
-      mainImageUrl: 'path/to/main/image1.jpg',
-      additionalImageUrls: ['path/to/image1.jpg', 'path/to/image2.jpg']
+      mainImageUrl: 'https://archive.org/download/l_covers_0010/l_covers_0010_54.zip/0010544254-L.jpg',
+      additionalImageUrls: [
+        'https://archive.org/download/l_covers_0008/l_covers_0008_15.zip/0008153054-L.jpg',
+        'https://archive.org/download/l_covers_0008/l_covers_0008_49.zip/0008494659-L.jpg'
+      ]
     },
     {
       shelfName: 'To Read',
-      mainImageUrl: 'path/to/main/image2.jpg',
-      additionalImageUrls: ['path/to/image3.jpg', 'path/to/image4.jpg']
+      mainImageUrl: 'https://archive.org/download/l_covers_0008/l_covers_0008_15.zip/0008153054-L.jpg',
+      additionalImageUrls: [
+        'https://archive.org/download/l_covers_0008/l_covers_0008_23.zip/0008238803-L.jpg',
+      ]
     }
   ];
 }
