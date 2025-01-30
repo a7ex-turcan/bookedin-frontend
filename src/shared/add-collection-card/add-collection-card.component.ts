@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {NgIf} from '@angular/common';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-add-collection-card',
@@ -15,6 +15,8 @@ export class AddCollectionCardComponent {
   public isEditing: boolean = false;
   public collectionName: string = '';
 
+  @Output() collectionCreated = new EventEmitter<{ shelfName: string, images: string[] }>();
+
   startEditing() {
     this.isEditing = true;
   }
@@ -25,8 +27,10 @@ export class AddCollectionCardComponent {
   }
 
   saveCollection() {
-    // Logic to save the collection (to be implemented later)
-    this.isEditing = false;
-    this.collectionName = '';
+    if (this.collectionName.trim()) {
+      this.collectionCreated.emit({ shelfName: this.collectionName, images: [] });
+      this.isEditing = false;
+      this.collectionName = '';
+    }
   }
 }

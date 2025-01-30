@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ShelfCardComponent } from '../shelf-card/shelf-card.component';
 import { NgForOf } from '@angular/common';
-import {AddCollectionCardComponent} from '../add-collection-card/add-collection-card.component';
+import { AddCollectionCardComponent } from '../add-collection-card/add-collection-card.component';
 
 @Component({
   selector: 'app-shelf-list',
@@ -13,10 +13,12 @@ import {AddCollectionCardComponent} from '../add-collection-card/add-collection-
   ],
   styleUrls: ['./shelf-list.component.sass']
 })
-export class ShelfListComponent implements OnInit {
+export class ShelfListComponent {
   @Input() shelves: { shelfName: string, images: string[] }[] = [];
+  @Output() shelfCreated = new EventEmitter<{ shelfName: string, images: string[] }>();
 
-  constructor() { }
-
-  ngOnInit(): void { }
+  onCollectionCreated(newCollection: { shelfName: string, images: string[] }) {
+    this.shelves.push(newCollection);
+    this.shelfCreated.emit(newCollection);
+  }
 }

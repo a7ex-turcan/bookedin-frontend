@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ShelfListComponent} from '../../shared/shelf-list/shelf-list.component';
-import {UserStoreService} from '../../core/services/user-store.service';
-import {UserBookCollectionService} from '../../core/services/user-book-collection.service';
-import {Observable, of} from 'rxjs';
-import {switchMap, map} from 'rxjs/operators';
-import {AsyncPipe} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ShelfListComponent } from '../../shared/shelf-list/shelf-list.component';
+import { UserStoreService } from '../../core/services/user-store.service';
+import { UserBookCollectionService } from '../../core/services/user-book-collection.service';
+import { Observable, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-shelves',
@@ -21,8 +21,7 @@ export class UserShelvesComponent implements OnInit {
   constructor(
     private userStoreService: UserStoreService,
     private userBookCollectionService: UserBookCollectionService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.shelves$ = this.userStoreService.user$.pipe(
@@ -39,5 +38,32 @@ export class UserShelvesComponent implements OnInit {
         }
       })
     );
+  }
+
+  onShelfCreated(newShelf: { shelfName: string, images: string[] }) {
+    this.userStoreService.user$.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.userBookCollectionService.createCollection({
+            collectionName: newShelf.shelfName,
+            workIds: [],
+          });
+        } else {
+          return of(null);
+        }
+      })
+    ).subscribe({
+      next: collection => {
+        if (collection) {
+          this.shelves$ = this.shelves$.pipe(
+            map(shelves => [...shelves, {
+              shelfName: collection.collectionName,
+              images: []
+            }])
+          );
+        }
+      },
+      error: error => console.error('Error creating collection:', error)
+    });
   }
 }
