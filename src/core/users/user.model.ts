@@ -1,4 +1,11 @@
+export interface BookCollectionInfo {
+  collectionName: string;
+  workIds: string[];
+}
+
 export interface User {
   email: string;
-  name: string;
+  fullName: string;
+  dateOfBirth: Date;
+  collections: BookCollectionInfo[];
 }

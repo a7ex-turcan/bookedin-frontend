@@ -6,7 +6,7 @@
   <div *ngIf="showFlyout" class="absolute top-full right-0 mt-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg">
     <ul *ngIf="items.length > 0; else noShelves">
       <li *ngFor="let item of items" class="p-2 hover:bg-gray-100">
-        <span [class.font-bold]="item.isShelved">{{ item.name }}</span>
+        <span [class.font-bold]="item.isOnShelf">{{ item.name }}</span>
       </li>
     </ul>
     <ng-template #noShelves>

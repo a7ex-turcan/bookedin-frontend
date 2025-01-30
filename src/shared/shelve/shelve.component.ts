@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import {NgForOf, NgIf} from "@angular/common";
 
-interface ShelveItem {
+export interface ShelfItem {
   name: string;
-  isShelved: boolean;
+  isOnShelf: boolean;
 }
 
 @Component({
@@ -16,7 +16,7 @@ interface ShelveItem {
   styleUrls: ['./shelve.component.sass']
 })
 export class ShelveComponent {
-  @Input() items: ShelveItem[] = [];
+  @Input() items: ShelfItem[] = [];
   showFlyout = false;
 
   onAddBook() {
