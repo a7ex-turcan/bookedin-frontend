@@ -7,6 +7,7 @@ import { BookService } from '../../core/services/book.service';
 import { FavoritesService } from '../../core/services/favorites.service';
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
+import {ShelveComponent} from '../../shared/shelve/shelve.component';
 
 @Component({
   selector: 'app-book-details',
@@ -15,7 +16,8 @@ import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
     AsyncPipe,
     NgIf,
     AuthorsListPipe,
-    NgForOf
+    NgForOf,
+    ShelveComponent
   ],
   styleUrls: ['./book-details.component.sass']
 })
@@ -90,5 +92,9 @@ export class BookDetailsComponent implements OnInit {
 
   getDisplayedSubjects(): string[] {
     return this.showAllTags ? this.processedSubjects : this.processedSubjects.slice(0, 10);
+  }
+
+  onBookAdded() {
+
   }
 }
