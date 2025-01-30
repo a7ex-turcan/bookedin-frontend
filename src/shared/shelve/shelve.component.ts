@@ -1,15 +1,25 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import { Component, Input } from '@angular/core';
+import {NgForOf, NgIf} from "@angular/common";
+
+interface ShelveItem {
+  name: string;
+  isShelved: boolean;
+}
 
 @Component({
   selector: 'app-shelve',
-  imports: [],
   templateUrl: './shelve.component.html',
-  styleUrl: './shelve.component.sass'
+  imports: [
+    NgIf,
+    NgForOf
+  ],
+  styleUrls: ['./shelve.component.sass']
 })
 export class ShelveComponent {
-  @Output() bookAdded = new EventEmitter<void>();
+  @Input() items: ShelveItem[] = [];
+  showFlyout = false;
 
   onAddBook() {
-    this.bookAdded.emit();
+    this.showFlyout = !this.showFlyout;
   }
 }
