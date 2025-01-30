@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ShelfListComponent } from '../../shared/shelf-list/shelf-list.component';
-import { UserStoreService } from '../../core/services/user-store.service';
-import { UserBookCollectionService } from '../../core/services/user-book-collection.service';
-import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
-import { AsyncPipe } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {ShelfListComponent} from '../../shared/shelf-list/shelf-list.component';
+import {UserStoreService} from '../../core/services/user-store.service';
+import {UserBookCollectionService} from '../../core/services/user-book-collection.service';
+import {Observable, of} from 'rxjs';
+import {switchMap, map} from 'rxjs/operators';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-user-shelves',
@@ -21,7 +21,8 @@ export class UserShelvesComponent implements OnInit {
   constructor(
     private userStoreService: UserStoreService,
     private userBookCollectionService: UserBookCollectionService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.shelves$ = this.userStoreService.user$.pipe(
@@ -40,6 +41,7 @@ export class UserShelvesComponent implements OnInit {
     );
   }
 
+
   onShelfCreated(newShelf: { shelfName: string, images: string[] }) {
     this.userStoreService.user$.pipe(
       switchMap(user => {
@@ -56,10 +58,16 @@ export class UserShelvesComponent implements OnInit {
       next: collection => {
         if (collection) {
           this.shelves$ = this.shelves$.pipe(
-            map(shelves => [...shelves, {
-              shelfName: collection.collectionName,
-              images: []
-            }])
+            map(shelves => {
+              const exists = shelves.some(shelf => shelf.shelfName === collection.collectionName);
+              if (!exists) {
+                return [...shelves, {
+                  shelfName: collection.collectionName,
+                  images: []
+                }];
+              }
+              return shelves;
+            })
           );
         }
       },
