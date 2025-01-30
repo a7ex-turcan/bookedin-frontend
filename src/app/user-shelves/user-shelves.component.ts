@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ShelfListComponent} from '../../shared/shelf-list/shelf-list.component';
 import {UserStoreService} from '../../core/services/user-store.service';
 import {UserBookCollectionService} from '../../core/services/user-book-collection.service';
-import {UserBookCollection} from '../../core/books/user-book-collection.model';
 import {Observable, of} from 'rxjs';
 import {switchMap, map} from 'rxjs/operators';
 import {AsyncPipe} from '@angular/common';
