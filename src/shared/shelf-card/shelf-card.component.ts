@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {NgForOf, NgIf, NgStyle} from '@angular/common';
+import { NgForOf, NgIf, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-shelf-card',
@@ -14,4 +14,12 @@ import {NgForOf, NgIf, NgStyle} from '@angular/common';
 export class ShelfCardComponent {
   @Input() title: string = '';
   @Input() images: string[] = [];
+
+  get displayImages(): string[] {
+    return this.images.length > 0 ? this.images : ['book-placeholder.png'];
+  }
+
+  get hasBooks(): boolean {
+    return this.images.length > 0;
+  }
 }
