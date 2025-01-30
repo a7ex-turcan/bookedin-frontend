@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UserService, User } from './users.service';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+
+import { Observable, BehaviorSubject, of } from 'rxjs';
+import { tap, switchMap } from 'rxjs/operators';
+import {UserService} from './users.service';
+import {User} from '../users/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +15,13 @@ export class UserStoreService {
   constructor(private userService: UserService) {}
 
   loadUser(): Observable<User | null> {
-    return this.userService.getCurrentUser().pipe(
-      tap(user => this.userSubject.next(user))
-    );
+    if (this.userSubject.value) {
+      return of(this.userSubject.value);
+    } else {
+      return this.userService.getCurrentUser().pipe(
+        tap(user => this.userSubject.next(user))
+      );
+    }
   }
 
   getUser(): User | null {
