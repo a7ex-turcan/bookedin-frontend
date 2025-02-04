@@ -1,5 +1,5 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
-import {NgForOf} from '@angular/common';
+import {NgClass, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-star-rating',
@@ -9,23 +9,8 @@ import {NgForOf} from '@angular/common';
   ],
   styleUrls: ['./star-rating.component.sass']
 })
-export class StarRatingComponent implements OnInit {
+export class StarRatingComponent {
   @Input() rating: number = 0;
   @Output() ratingChange: EventEmitter<number> = new EventEmitter<number>();
-
-  stars: boolean[] = Array(5).fill(false);
-
-  ngOnInit() {
-    this.updateStars();
-  }
-
-  updateStars() {
-    this.stars = this.stars.map((_, i) => i < this.rating);
-  }
-
-  setRating(index: number) {
-    this.rating = index + 1;
-    this.ratingChange.emit(this.rating);
-    this.updateStars();
-  }
+  stars: number[] = [1, 2, 3, 4, 5];
 }
