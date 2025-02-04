@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
 
 export interface ShelfItem {
+  id: string;
   name: string;
   isOnShelf: boolean;
 }
