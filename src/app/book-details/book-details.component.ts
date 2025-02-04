@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
     import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
     import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
     import { ShelveComponent, ShelfItem } from '../../shared/shelve/shelve.component';
+import {FavoritesService} from '../../core/services/favorites.service';
 
     @Component({
       selector: 'app-book-details',
@@ -36,7 +37,8 @@ import { Component, OnInit } from '@angular/core';
         private bookService: BookService,
         private route: ActivatedRoute,
         private userBookCollectionService: UserBookCollectionService,
-        private userStoreService: UserStoreService
+        private userStoreService: UserStoreService,
+        private favoritesService: FavoritesService
       ) { }
 
       ngOnInit() {
@@ -88,12 +90,12 @@ import { Component, OnInit } from '@angular/core';
       toggleFavorite(bookDetails: BookDetails) {
         if (this.isFavorite) {
           this.isFavorite = false;
-          this.userBookCollectionService.removeBookFromCollection('favorites', bookDetails.workId).subscribe(() => {
+          this.favoritesService.removeFavourite(bookDetails.workId).subscribe(() => {
             this.isFavorite = false;
           });
         } else {
           this.isFavorite = true;
-          this.userBookCollectionService.addBookToCollection('favorites', bookDetails.workId).subscribe(() => {
+          this.favoritesService.addFavourite(bookDetails.workId).subscribe(() => {
             this.isFavorite = true;
           });
         }
