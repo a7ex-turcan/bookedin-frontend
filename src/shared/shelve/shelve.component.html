@@ -7,6 +7,9 @@
     <ul *ngIf="items.length > 0; else noShelves">
       <li *ngFor="let item of items" class="p-2 hover:bg-gray-100">
         <span [class.font-bold]="item.isOnShelf">{{ item.name }}</span>
+        <button (click)="toggleShelf(item)" class="ml-2 text-sm text-blue-500 hover:underline">
+          {{ item.isOnShelf ? 'Remove' : 'Add' }}
+        </button>
       </li>
     </ul>
     <ng-template #noShelves>
