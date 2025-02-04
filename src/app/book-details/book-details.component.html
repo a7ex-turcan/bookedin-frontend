@@ -1,63 +1,68 @@
 <div class="p-4 bg-white rounded-lg shadow-md w-full">
-              <div *ngIf="book$ | async as book; else loading">
-                <ng-container *ngIf="!isLoading; else loading">
-                  <div class="flex justify-between items-center mb-4">
-                    <div class="text-2xl font-semibold">{{ book.title }}</div>
-                    <div class="flex items-center space-x-2">
-                      <app-shelve [items]="(shelves$| async) ?? []" class="mt-0.5"/>
-                      <button (click)="toggleFavorite(book)" [class.text-yellow-500]="isFavorite"
-                              class="text-gray-400 hover:text-yellow-500">
-                        <i class="fas fa-star"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="flex">
-                    <div class="w-1/3 relative">
-                      <div class="absolute inset-0 flex justify-center" [class.hidden]="imageLoaded">
-                        <div class="h-96 w-full bg-gray-300 rounded-md animate-pulse"></div>
-                      </div>
-                      <img [src]="'api/books/cover/' + book.coverId + '?size=l'"
-                           class="w-full max-w-xs max-h-96 aspect-[1/1.5] rounded-md"
-                           (load)="imageLoaded = true">
-                    </div>
-                    <div class="w-2/3 pl-4">
-                      <div class="mb-2">
-                        <span class="font-semibold">Authors:</span> {{ book.authors | authorsList }}
-                      </div>
-                      <div class="mb-2">
-                        <span class="font-semibold">Description:</span> {{ book.description }}
-                      </div>
-                      <div class="mb-2">
-                        <span class="font-semibold">Subjects:</span>
-                        <div class="flex flex-wrap gap-2 mt-2">
-                          <a *ngFor="let subject of getDisplayedSubjects()" href="#"
-                             class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-                            {{ subject }}
-                          </a>
-                          <button *ngIf="processedSubjects.length > 10" (click)="toggleShowAllTags()"
-                                  class="text-blue-500 hover:underline">
-                            {{ showAllTags ? 'Show less...' : 'Show more...' }}
-                          </button>
+                        <div *ngIf="book$ | async as book; else loading">
+                          <ng-container *ngIf="!isLoading; else loading">
+                            <div class="flex justify-between items-center mb-4">
+                              <div class="text-2xl font-semibold">{{ book.title }}</div>
+                              <div class="flex items-center space-x-2">
+                                <app-shelve
+                                  [items]="(shelves$ | async) ?? []"
+                                  (bookAdded)="onBookAdded($event, book.workId)"
+                                  (bookRemoved)="onBookRemoved($event, book.workId)"
+                                  class="mt-0.5">
+                                </app-shelve>
+                                <button (click)="toggleFavorite(book)" [class.text-yellow-500]="isFavorite"
+                                        class="text-gray-400 hover:text-yellow-500">
+                                  <i class="fas fa-star"></i>
+                                </button>
+                              </div>
+                            </div>
+                            <div class="flex">
+                              <div class="w-1/3 relative">
+                                <div class="absolute inset-0 flex justify-center" [class.hidden]="imageLoaded">
+                                  <div class="h-96 w-full bg-gray-300 rounded-md animate-pulse"></div>
+                                </div>
+                                <img [src]="'api/books/cover/' + book.coverId + '?size=l'"
+                                     class="w-full max-w-xs max-h-96 aspect-[1/1.5] rounded-md"
+                                     (load)="imageLoaded = true">
+                              </div>
+                              <div class="w-2/3 pl-4">
+                                <div class="mb-2">
+                                  <span class="font-semibold">Authors:</span> {{ book.authors | authorsList }}
+                                </div>
+                                <div class="mb-2">
+                                  <span class="font-semibold">Description:</span> {{ book.description }}
+                                </div>
+                                <div class="mb-2">
+                                  <span class="font-semibold">Subjects:</span>
+                                  <div class="flex flex-wrap gap-2 mt-2">
+                                    <a *ngFor="let subject of getDisplayedSubjects()" href="#"
+                                       class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                                      {{ subject }}
+                                    </a>
+                                    <button *ngIf="processedSubjects.length > 10" (click)="toggleShowAllTags()"
+                                            class="text-blue-500 hover:underline">
+                                      {{ showAllTags ? 'Show less...' : 'Show more...' }}
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </ng-container>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </ng-container>
-              </div>
 
-              <ng-template #loading>
-                <div class="animate-pulse">
-                  <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
-                  <div class="flex">
-                    <div class="w-1/3">
-                      <div class="h-96 bg-gray-300 rounded-md"></div>
-                    </div>
-                    <div class="w-2/3 pl-4">
-                      <div class="h-6 bg-gray-300 rounded w-1/2 mb-2"></div>
-                      <div class="h-6 bg-gray-300 rounded w-full mb-2"></div>
-                      <div class="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </div>
+                        <ng-template #loading>
+                          <div class="animate-pulse">
+                            <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
+                            <div class="flex">
+                              <div class="w-1/3">
+                                <div class="h-96 bg-gray-300 rounded-md"></div>
+                              </div>
+                              <div class="w-2/3 pl-4">
+                                <div class="h-6 bg-gray-300 rounded w-1/2 mb-2"></div>
+                                <div class="h-6 bg-gray-300 rounded w-full mb-2"></div>
+                                <div class="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+                              </div>
+                            </div>
+                          </div>
+                        </ng-template>
+                      </div>
