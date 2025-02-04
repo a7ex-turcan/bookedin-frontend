@@ -1,1 +1,8 @@
-<p>star-rating works!</p>
+<div class="flex space-x-1">
+  <i *ngFor="let star of stars; let i = index"
+     class="fas"
+     [class.fa-star]="star"
+     [class.fa-star-o]="!star"
+     (click)="setRating(i)">
+  </i>
+</div>
