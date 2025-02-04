@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
     import { AuthorsListPipe } from '../../core/pipes/author-list.pipe';
     import { ShelveComponent, ShelfItem } from '../../shared/shelve/shelve.component';
 import {FavoritesService} from '../../core/services/favorites.service';
+import {StarRatingComponent} from '../../shared/star-rating/star-rating.component';
 
     @Component({
       selector: 'app-book-details',
@@ -19,7 +20,8 @@ import {FavoritesService} from '../../core/services/favorites.service';
         NgIf,
         AuthorsListPipe,
         NgForOf,
-        ShelveComponent
+        ShelveComponent,
+        StarRatingComponent
       ],
       styleUrls: ['./book-details.component.sass']
     })

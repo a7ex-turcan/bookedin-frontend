@@ -7,7 +7,7 @@ import {NgForOf} from '@angular/common';
   imports: [
     NgForOf
   ],
-  styleUrls: ['./star-rating.component.css']
+  styleUrls: ['./star-rating.component.sass']
 })
 export class StarRatingComponent implements OnInit {
   @Input() rating: number = 0;
