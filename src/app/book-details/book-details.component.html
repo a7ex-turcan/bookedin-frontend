@@ -21,7 +21,7 @@
       </div>
       <div class="flex">
         <div class="w-1/4 relative">
-          <div class="absolute inset-0 flex justify-center" [class.hidden]="imageLoaded">
+          <div class="relative inset-0 flex justify-center" [class.hidden]="imageLoaded">
             <div class="h-72 w-full bg-gray-300 rounded-md animate-pulse"></div>
           </div>
           <img [src]="'api/books/cover/' + book.coverId + '?size=l'"
