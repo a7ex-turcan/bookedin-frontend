@@ -1,72 +1,72 @@
 <div class="p-4 bg-white rounded-lg shadow-md w-full">
-                          <div *ngIf="book$ | async as book; else loading">
-                            <ng-container *ngIf="!isLoading; else loading">
-                              <div class="flex justify-between items-center mb-4">
-                                <div>
-                                  <div class="text-2xl font-semibold">{{ book.title }}</div>
-                                  <div class="text-lg text-gray-600">by {{ book.authors | authorsList }}</div>
-                                </div>
-                                <div class="flex items-center space-x-2">
-                                  <app-shelve
-                                    [items]="(shelves$ | async) ?? []"
-                                    (bookAdded)="onBookAdded($event, book.workId)"
-                                    (bookRemoved)="onBookRemoved($event, book.workId)"
-                                    class="mt-0.5">
-                                  </app-shelve>
-                                  <button (click)="toggleFavorite(book)" [class.text-yellow-500]="isFavorite"
-                                          class="text-gray-400 hover:text-yellow-500">
-                                    <i class="fas fa-star"></i>
-                                  </button>
-                                </div>
-                              </div>
-                              <div class="flex">
-                                <div class="w-1/4 relative">
-                                  <div class="relative inset-0 flex justify-center" [class.hidden]="imageLoaded">
-                                    <div class="h-72 w-full bg-gray-300 rounded-md animate-pulse"></div>
-                                  </div>
-                                  <img [src]="'api/books/cover/' + book.coverId + '?size=l'"
-                                       class="w-full rounded-md"
-                                       (load)="imageLoaded = true">
-                                  <div class="mt-2 flex items-center">
-                                    <span class="font-semibold mr-2">Rating:</span>
-                                    <app-star-rating></app-star-rating>
-                                  </div>
-                                </div>
-                                <div class="w-3/4 pl-4">
-                                  <div class="mb-2">
-                                    <span class="font-semibold">Description:</span> {{ book.description }}
-                                  </div>
-                                  <div class="mb-2">
-                                    <span class="font-semibold">Subjects:</span>
-                                    <div class="flex flex-wrap gap-2 mt-2">
-                                      <a *ngFor="let subject of getDisplayedSubjects()" href="#"
-                                         class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
-                                        {{ subject }}
-                                      </a>
-                                      <button *ngIf="processedSubjects.length > 10" (click)="toggleShowAllTags()"
-                                              class="text-blue-500 hover:underline">
-                                        {{ showAllTags ? 'Show less...' : 'Show more...' }}
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </ng-container>
-                          </div>
-
-                          <ng-template #loading>
-                            <div class="animate-pulse">
-                              <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
-                              <div class="flex">
-                                <div class="w-1/4">
-                                  <div class="h-72 bg-gray-300 rounded-md"></div>
-                                </div>
-                                <div class="w-3/4 pl-4">
-                                  <div class="h-6 bg-gray-300 rounded w-1/2 mb-2"></div>
-                                  <div class="h-6 bg-gray-300 rounded w-full mb-2"></div>
-                                  <div class="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
-                                </div>
-                              </div>
-                            </div>
-                          </ng-template>
+              <div *ngIf="book$ | async as book; else loading">
+                <ng-container *ngIf="!isLoading; else loading">
+                  <div class="flex justify-between items-center mb-4">
+                    <div>
+                      <div class="text-2xl font-semibold">{{ book.title }}</div>
+                      <div class="text-lg text-gray-600">by {{ book.authors | authorsList }}</div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <app-shelve
+                        [items]="(shelves$ | async) ?? []"
+                        (bookAdded)="onBookAdded($event, book.workId)"
+                        (bookRemoved)="onBookRemoved($event, book.workId)"
+                        class="mt-0.5">
+                      </app-shelve>
+                      <button (click)="toggleFavorite(book)" [class.text-yellow-500]="isFavorite"
+                              class="text-gray-400 hover:text-yellow-500">
+                        <i class="fas fa-star"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="flex">
+                    <div class="w-1/4 relative">
+                      <div class="relative inset-0 flex justify-center" [class.hidden]="imageLoaded">
+                        <div class="h-72 w-full bg-gray-300 rounded-md animate-pulse"></div>
+                      </div>
+                      <img [src]="'api/books/cover/' + book.coverId + '?size=l'"
+                           class="w-full rounded-md"
+                           (load)="imageLoaded = true">
+                      <div class="mt-4 flex items-center">
+                        <span class="font-semibold mr-2">Rating:</span>
+                        <app-star-rating class="ml-2"></app-star-rating>
+                      </div>
+                    </div>
+                    <div class="w-3/4 pl-4">
+                      <div class="mb-2">
+                        <span class="font-semibold">Description:</span> {{ book.description }}
+                      </div>
+                      <div class="mb-2">
+                        <span class="font-semibold">Subjects:</span>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                          <a *ngFor="let subject of getDisplayedSubjects()" href="#"
+                             class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">
+                            {{ subject }}
+                          </a>
+                          <button *ngIf="processedSubjects.length > 10" (click)="toggleShowAllTags()"
+                                  class="text-blue-500 hover:underline">
+                            {{ showAllTags ? 'Show less...' : 'Show more...' }}
+                          </button>
                         </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+
+              <ng-template #loading>
+                <div class="animate-pulse">
+                  <div class="h-8 bg-gray-300 rounded w-3/4 mb-4"></div>
+                  <div class="flex">
+                    <div class="w-1/4">
+                      <div class="h-72 bg-gray-300 rounded-md"></div>
+                    </div>
+                    <div class="w-3/4 pl-4">
+                      <div class="h-6 bg-gray-300 rounded w-1/2 mb-2"></div>
+                      <div class="h-6 bg-gray-300 rounded w-full mb-2"></div>
+                      <div class="h-6 bg-gray-300 rounded w-3/4 mb-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
