@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import {AvatarComponent} from '../../shared/avatar/avatar.component';
 import {NgIf, NgStyle} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
@@ -10,7 +10,8 @@ import {RouterLink} from '@angular/router';
     AvatarComponent,
     NgStyle,
     NgIf,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ],
   styleUrls: ['./side-menu.component.sass']
 })
