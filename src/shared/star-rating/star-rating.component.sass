@@ -1,7 +1,16 @@
 .text-gold
   color: gold
-  transition: color 0.2s ease
+  transition: color 0.2s ease-in-out
 
 .text-gray-400
   color: #cbd5e0
-  transition: color 0.2s ease
+  transition: color 0.2s ease-in-out
+
+.absolute.overflow-hidden
+  transition: width 0.2s ease-in-out
+
+.fas.fa-star
+  transform-origin: center
+  transition: transform 0.2s ease-in-out
+  &:hover
+    transform: scale(1.1)
