@@ -1,14 +1,12 @@
-<div class="flex">
+<div class="flex gap-1">
   <div *ngFor="let star of stars; let i = index"
-       class="relative cursor-pointer w-[2em] h-[2em]"
+       class="relative cursor-pointer text-2xl"
        (mousemove)="updateRating($event, i)"
        (click)="updateRating($event, i)"
        (mouseleave)="clearHover()">
-    <!-- Empty star (background) -->
-    <i class="fas fa-star text-2xl text-gray-400 absolute"></i>
-    <!-- Filled star (overlay) -->
-    <div class="absolute overflow-hidden" [style.width]="getStarPercentage(i)">
-      <i class="fas fa-star text-2xl text-gold"></i>
+    <i class="fas fa-star text-gray-400"></i>
+    <div class="absolute top-0 left-0 overflow-hidden" [style.width]="getStarPercentage(i)">
+      <i class="fas fa-star text-gold"></i>
     </div>
   </div>
 </div>
