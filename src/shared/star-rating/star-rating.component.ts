@@ -5,8 +5,7 @@ import { NgClass, NgForOf } from '@angular/common';
   selector: 'app-star-rating',
   templateUrl: './star-rating.component.html',
   imports: [
-    NgForOf,
-    NgClass
+    NgForOf
   ],
   styleUrls: ['./star-rating.component.sass']
 })

@@ -10,6 +10,7 @@ import {SearchResultsBooksComponent} from './search/search-results/search-result
 import {SearchResultsReadersComponent} from './search/search-results/search-results-readers/search-results-readers.component';
 import {SearchResultsAuthorsComponent} from './search/search-results/search-results-authors/search-results-authors.component';
 import {UserShelvesComponent} from './user-shelves/user-shelves.component';
+import {SignupComponent} from './signup/signup.component';
 
 export const routes: Routes = [
   {
@@ -40,6 +41,11 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [redirectIfAuthGuard],
+  },
+  {
+    path: 'signup',
+    component: SignupComponent,
     canActivate: [redirectIfAuthGuard],
   },
 ];
