@@ -6,6 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
+  standalone: true,
   imports: [
     FormsModule,
     CommonModule,
@@ -18,14 +19,16 @@ export class SignupComponent {
   nickname: string = '';
   birthday: string = '';
   password: string = '';
+  confirmPassword: string = '';
   isLoading: boolean = false;
   errorMessage: string = '';
 
   constructor(private router: Router) {}
 
   async onSubmit() {
-    if (!this.isFormValid()) {
-      this.errorMessage = 'Please fill in all required fields';
+    const errorMessage = this.getErrorMessage();
+    if (errorMessage) {
+      this.errorMessage = errorMessage;
       return;
     }
 
@@ -44,7 +47,31 @@ export class SignupComponent {
   }
 
   private isFormValid(): boolean {
-    return !!this.fullName && !!this.email && !!this.password && !!this.birthday;
+    return (
+      !!this.fullName && 
+      !!this.email && 
+      !!this.password && 
+      !!this.birthday &&
+      this.password === this.confirmPassword
+    );
+  }
+
+  private isValidEmail(email: string): boolean {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  }
+
+  private getErrorMessage(): string {
+    if (!this.fullName || !this.email || !this.password || !this.birthday) {
+      return 'Please fill in all required fields';
+    }
+    if (!this.isValidEmail(this.email)) {
+      return 'Please enter a valid email address';
+    }
+    if (this.password !== this.confirmPassword) {
+      return 'Passwords do not match';
+    }
+    return '';
   }
 
   private async signupUser(): Promise<void> {
