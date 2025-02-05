@@ -40,4 +40,11 @@ export class StarRatingComponent {
     if (rating > index && rating < index + 1) return 'fa-star-half-alt text-gold';
     return 'fa-star text-gray-400';
   }
+
+  getStarPercentage(index: number): string {
+    const rating = this.hoverRating || this.rating;
+    if (rating >= index + 1) return '100%';
+    if (rating > index) return '50%';
+    return '0%';
+  }
 }
