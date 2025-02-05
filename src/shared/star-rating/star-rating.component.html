@@ -1,7 +1,9 @@
 <div class="flex">
   <i *ngFor="let star of stars; let i = index"
-     (mouseenter)="setHover(i)"
+     class="fas text-2xl cursor-pointer"
+     (mousemove)="updateRating($event, i)"
+     (click)="updateRating($event, i)"
      (mouseleave)="clearHover()"
-     [ngClass]="{'text-gold': i <= hoverIndex, 'text-gray-400': i > hoverIndex}"
-     class="cursor-pointer text-2xl fas fa-star"></i>
+     [ngClass]="getStarClass(i)">
+  </i>
 </div>
