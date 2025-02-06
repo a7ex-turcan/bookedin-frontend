@@ -1,6 +1,6 @@
 <div class="flex items-center bg-white shadow-lg rounded-lg">
   <div class="mr-4 p-2 relative inset-0 bg-cover bg-center rounded-tl-lg rounded-bl-lg" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}">
-    <app-avatar name="Alex Turcan" position="right" class="relative z-10" size="s"></app-avatar>
+    <app-avatar *ngIf="user$ | async as user" [name]="user.fullName" position="right" class="relative z-10" size="s"></app-avatar>
   </div>
   <ul class="flex space-x-4 list-none">
     <li>

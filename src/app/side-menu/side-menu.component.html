@@ -1,7 +1,7 @@
 <div class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden relative">
   <div *ngIf="backgroundImageUrl" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}" class="absolute inset-0 w-full h-32 bg-cover bg-center z-0"></div>
   <div class="relative z-10 flex justify-center pt-2">
-    <app-avatar name="Alex Turcan"></app-avatar>
+    <app-avatar *ngIf="user$ | async as user" [name]="user.fullName"></app-avatar>
   </div>
   <div class="p-4 relative z-10">
     <ul class="list-none">
