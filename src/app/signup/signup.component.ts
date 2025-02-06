@@ -2,6 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+
+interface ValidationErrorResponse {
+  type: string;
+  title: string;
+  status: number;
+  errors: {
+    [key: string]: string[];
+  };
+  traceId: string;
+}
 
 @Component({
   selector: 'app-signup',
@@ -23,7 +34,10 @@ export class SignupComponent {
   isLoading: boolean = false;
   errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   async onSubmit() {
     const errorMessage = this.getErrorMessage();
@@ -36,11 +50,10 @@ export class SignupComponent {
     this.errorMessage = '';
 
     try {
-      // TODO: Implement your signup service call here
       await this.signupUser();
       this.router.navigate(['/login']);
     } catch (error: any) {
-      this.errorMessage = error.message || 'An error occurred during signup';
+      this.errorMessage = this.formatValidationErrors(error);
     } finally {
       this.isLoading = false;
     }
@@ -75,9 +88,44 @@ export class SignupComponent {
   }
 
   private async signupUser(): Promise<void> {
-    // TODO: Replace with actual API call
-    return new Promise((resolve) => {
-      setTimeout(resolve, 1000);
+    return new Promise((resolve, reject) => {
+      this.authService.signUp({
+        email: this.email,
+        fullName: this.fullName,
+        nickname: this.nickname || undefined,
+        dateOfBirth: this.birthday,
+        password: this.password
+      }).subscribe({
+        next: () => resolve(),
+        error: (error) => reject(error)
+      });
     });
+  }
+
+  private formatValidationErrors(error: any): string {
+    if (!error.error) {
+      return error.message || 'An error occurred during signup';
+    }
+
+    // Handle array of error messages format
+    if (Array.isArray(error.error.errors)) {
+      return error.error.errors.join('\n');
+    }
+
+    // Handle RFC validation error format
+    if (typeof error.error.errors === 'object') {
+      const validationError = error.error as ValidationErrorResponse;
+      const errorMessages: string[] = [];
+      
+      for (const [field, messages] of Object.entries(validationError.errors)) {
+        messages.forEach(message => {
+          errorMessages.push(message);
+        });
+      }
+      
+      return errorMessages.join('\n');
+    }
+
+    return error.error.message || 'An error occurred during signup';
   }
 }
