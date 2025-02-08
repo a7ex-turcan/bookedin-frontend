@@ -5,7 +5,7 @@
     </a>
     <div class="flex items-center justify-center relative">
       <div class="flex-shrink-0 relative">
-        <app-avatar *ngIf="user$ | async as user" [name]="user.fullName" position="right" class="relative z-10" size="s"></app-avatar>
+        <app-avatar *ngIf="user" [name]="user.fullName" position="right" class="relative z-10" size="s"></app-avatar>
       </div>
     </div>
   </div>
