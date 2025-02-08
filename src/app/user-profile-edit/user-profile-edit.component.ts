@@ -17,7 +17,6 @@ export class UserProfileEditComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
       fullName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       nickName: [''],
