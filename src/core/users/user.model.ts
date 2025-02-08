@@ -9,5 +9,6 @@ export interface User {
   fullName: string;
   dateOfBirth: Date;
   nickName: string;
+  profilePictureUrl?: string;
   collections: BookCollectionInfo[];
 }

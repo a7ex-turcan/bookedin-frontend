@@ -12,13 +12,16 @@ import { User } from '../../core/users/user.model';
 })
 export class UserProfileEditComponent implements OnInit {
   profileForm: FormGroup;
+  selectedFile: File | null = null;
+  previewUrl: string | null = null;
 
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       fullName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
-      nickName: ['']
+      nickName: [''],
+      profilePicture: ['']
     });
   }
 
@@ -26,15 +29,38 @@ export class UserProfileEditComponent implements OnInit {
     // TODO: Load user data from service
   }
 
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedFile = file;
+      this.createPreview(file);
+    }
+  }
+
+  private createPreview(file: File) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.previewUrl = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  removeImage() {
+    this.selectedFile = null;
+    this.previewUrl = null;
+    this.profileForm.get('profilePicture')?.setValue('');
+  }
+
   onSubmit() {
     if (this.profileForm.valid) {
       const userData: User = {
         ...this.profileForm.value,
         dateOfBirth: new Date(this.profileForm.value.dateOfBirth),
-        collections: [] // Preserve existing collections
+        collections: [], // Preserve existing collections
+        profilePictureUrl: this.previewUrl // Add the profile picture URL
       };
       console.log('Saving user data:', userData);
-      // TODO: Save user data via service
+      // TODO: Save user data and upload image via service
     }
   }
 }

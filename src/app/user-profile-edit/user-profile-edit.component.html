@@ -2,6 +2,39 @@
   <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Profile</h2>
   
   <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <!-- Profile Picture Section -->
+    <div class="space-y-4">
+      <label class="block text-sm font-medium text-gray-700">Profile Picture</label>
+      <div class="flex items-center space-x-6">
+        <div class="relative w-24 h-24">
+          <img *ngIf="previewUrl" [src]="previewUrl" 
+               class="w-24 h-24 rounded-full object-cover border-2 border-gray-200" 
+               alt="Profile preview">
+          <div *ngIf="!previewUrl" 
+               class="w-24 h-24 rounded-full bg-gray-100 flex items-center justify-center border-2 border-gray-200">
+            <i class="fas fa-user text-3xl text-gray-400"></i>
+          </div>
+        </div>
+        
+        <div class="flex flex-col space-y-2">
+          <label class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 cursor-pointer transition-colors">
+            <input type="file" 
+                   class="hidden" 
+                   accept="image/*"
+                   formControlName="profilePicture"
+                   (change)="onFileSelected($event)">
+            Choose Image
+          </label>
+          <button *ngIf="previewUrl" 
+                  type="button"
+                  (click)="removeImage()"
+                  class="px-4 py-2 bg-red-50 text-red-600 rounded-md hover:bg-red-100 transition-colors text-sm">
+            Remove Image
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="space-y-2">
       <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
       <input id="email" 
