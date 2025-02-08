@@ -1,1 +1,53 @@
-<p>user-profile-edit works!</p>
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-8">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Edit Profile</h2>
+  
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div class="space-y-2">
+      <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+      <input id="email" 
+             type="email" 
+             formControlName="email"
+             class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+      <div *ngIf="profileForm.get('email')?.errors?.['required'] && profileForm.get('email')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Email is required
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
+      <input id="fullName" 
+             type="text" 
+             formControlName="fullName"
+             class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+      <div *ngIf="profileForm.get('fullName')?.errors?.['required'] && profileForm.get('fullName')?.touched"
+           class="text-red-500 text-sm mt-1">
+        Full name is required
+      </div>
+    </div>
+
+    <div class="space-y-2">
+      <label for="dateOfBirth" class="block text-sm font-medium text-gray-700">Date of Birth</label>
+      <input id="dateOfBirth" 
+             type="date" 
+             formControlName="dateOfBirth"
+             class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
+
+    <div class="space-y-2">
+      <label for="nickName" class="block text-sm font-medium text-gray-700">Nickname</label>
+      <input id="nickName" 
+             type="text" 
+             formControlName="nickName"
+             class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+    </div>
+
+    <div class="flex justify-end">
+      <button type="submit" 
+              [disabled]="!profileForm.valid"
+              class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors">
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>

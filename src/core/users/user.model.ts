@@ -8,5 +8,6 @@ export interface User {
   email: string;
   fullName: string;
   dateOfBirth: Date;
+  nickName: string;
   collections: BookCollectionInfo[];
 }

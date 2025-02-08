@@ -11,6 +11,7 @@ import {SearchResultsReadersComponent} from './search/search-results/search-resu
 import {SearchResultsAuthorsComponent} from './search/search-results/search-results-authors/search-results-authors.component';
 import {UserShelvesComponent} from './user-shelves/user-shelves.component';
 import {SignupComponent} from './signup/signup.component';
+import { UserProfileEditComponent } from './user-profile-edit/user-profile-edit.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +34,8 @@ export const routes: Routes = [
               {path: 'readers', component: SearchResultsReadersComponent},
               {path: 'authors', component: SearchResultsAuthorsComponent}
             ]
-          }
+          },
+          {path: 'profile/edit', component: UserProfileEditComponent}
         ],
       },
     ]
