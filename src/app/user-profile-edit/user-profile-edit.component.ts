@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { User } from '../../core/users/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile-edit',
@@ -15,7 +16,7 @@ export class UserProfileEditComponent implements OnInit {
   selectedFile: File | null = null;
   previewUrl: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.profileForm = this.fb.group({
       fullName: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
@@ -61,5 +62,9 @@ export class UserProfileEditComponent implements OnInit {
       console.log('Saving user data:', userData);
       // TODO: Save user data and upload image via service
     }
+  }
+
+  onCancel() {
+    this.router.navigate(['/']);
   }
 }
